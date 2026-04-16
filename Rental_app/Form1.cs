@@ -95,7 +95,7 @@ namespace Rental_app
         private void btn_dataPelanggan_Click(object sender, EventArgs e)
         {
             // Data Pelanggan
-            ShowPage(new UC_Template());
+            ShowPage(new UC_Pelanggan());
         }
 
         private void btn_laporan_Click(object sender, EventArgs e)

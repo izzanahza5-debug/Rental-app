@@ -7,6 +7,9 @@
     <Compile Update="UC_Detail.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UC_Pelanggan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UC_Status.cs">
       <SubType>UserControl</SubType>
     </Compile>
