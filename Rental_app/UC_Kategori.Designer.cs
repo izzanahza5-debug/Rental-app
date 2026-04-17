@@ -118,12 +118,14 @@ namespace Rental_app
             // 
             // gridKategori
             // 
+            gridKategori.AllowUserToDeleteRows = false;
             gridKategori.BackgroundColor = Color.White;
             gridKategori.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gridKategori.Columns.AddRange(new DataGridViewColumn[] { colNama, colDeskripsi });
             gridKategori.EditMode = DataGridViewEditMode.EditProgrammatically;
             gridKategori.Location = new Point(20, 168);
             gridKategori.Name = "gridKategori";
+            gridKategori.ReadOnly = true;
             gridKategori.RowHeadersWidth = 62;
             gridKategori.Size = new Size(665, 707);
             gridKategori.TabIndex = 2;
@@ -134,6 +136,7 @@ namespace Rental_app
             colNama.HeaderText = "Nama Kategori";
             colNama.MinimumWidth = 8;
             colNama.Name = "colNama";
+            colNama.ReadOnly = true;
             colNama.Width = 400;
             // 
             // colDeskripsi
@@ -141,6 +144,7 @@ namespace Rental_app
             colDeskripsi.HeaderText = "Kode Kategori";
             colDeskripsi.MinimumWidth = 8;
             colDeskripsi.Name = "colDeskripsi";
+            colDeskripsi.ReadOnly = true;
             colDeskripsi.Width = 200;
             // 
             // colID

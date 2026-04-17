@@ -42,8 +42,16 @@
             Column4 = new DataGridViewTextBoxColumn();
             Column5 = new DataGridViewTextBoxColumn();
             panel2 = new Panel();
+            label10 = new Label();
+            label11 = new Label();
+            textBox2 = new TextBox();
+            label1 = new Label();
+            textBox5 = new TextBox();
+            label2 = new Label();
+            textBox6 = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -137,11 +145,13 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.BackgroundColor = SystemColors.ButtonHighlight;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5 });
             dataGridView1.Location = new Point(20, 178);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 62;
             dataGridView1.Size = new Size(1058, 412);
             dataGridView1.TabIndex = 2;
@@ -183,10 +193,78 @@
             // 
             // panel2
             // 
+            panel2.BackColor = SystemColors.ButtonHighlight;
+            panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(textBox6);
+            panel2.Controls.Add(label1);
+            panel2.Controls.Add(textBox5);
+            panel2.Controls.Add(label11);
+            panel2.Controls.Add(label10);
+            panel2.Controls.Add(textBox2);
             panel2.Location = new Point(1084, 178);
             panel2.Name = "panel2";
             panel2.Size = new Size(336, 412);
             panel2.TabIndex = 3;
+            panel2.Visible = false;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(16, 76);
+            label10.Name = "label10";
+            label10.Size = new Size(110, 25);
+            label10.TabIndex = 19;
+            label10.Text = "Nama Mobil";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic);
+            label11.Location = new Point(84, 18);
+            label11.Name = "label11";
+            label11.Size = new Size(170, 32);
+            label11.TabIndex = 18;
+            label11.Text = "Formulir Input";
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(16, 104);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(295, 31);
+            textBox2.TabIndex = 16;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(16, 152);
+            label1.Name = "label1";
+            label1.Size = new Size(110, 25);
+            label1.TabIndex = 21;
+            label1.Text = "Nama Mobil";
+            // 
+            // textBox5
+            // 
+            textBox5.Location = new Point(16, 180);
+            textBox5.Name = "textBox5";
+            textBox5.Size = new Size(295, 31);
+            textBox5.TabIndex = 20;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(16, 233);
+            label2.Name = "label2";
+            label2.Size = new Size(110, 25);
+            label2.TabIndex = 23;
+            label2.Text = "Nama Mobil";
+            // 
+            // textBox6
+            // 
+            textBox6.Location = new Point(16, 261);
+            textBox6.Name = "textBox6";
+            textBox6.Size = new Size(295, 31);
+            textBox6.TabIndex = 22;
             // 
             // UC_Pelanggan
             // 
@@ -201,6 +279,8 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -221,5 +301,12 @@
         private DataGridViewTextBoxColumn Column4;
         private DataGridViewTextBoxColumn Column5;
         private Panel panel2;
+        private Label label11;
+        private Label label10;
+        private TextBox textBox2;
+        private Label label2;
+        private TextBox textBox6;
+        private Label label1;
+        private TextBox textBox5;
     }
 }

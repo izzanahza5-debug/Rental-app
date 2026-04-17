@@ -233,11 +233,13 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.BackgroundColor = SystemColors.HighlightText;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5 });
             dataGridView1.Location = new Point(20, 168);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 62;
             dataGridView1.Size = new Size(911, 532);
             dataGridView1.TabIndex = 15;
@@ -248,6 +250,7 @@
             Column1.HeaderText = "Nama Mobil";
             Column1.MinimumWidth = 8;
             Column1.Name = "Column1";
+            Column1.ReadOnly = true;
             Column1.Width = 200;
             // 
             // Column2
@@ -255,6 +258,7 @@
             Column2.HeaderText = "Nomor Plat";
             Column2.MinimumWidth = 8;
             Column2.Name = "Column2";
+            Column2.ReadOnly = true;
             Column2.Width = 150;
             // 
             // Column3
@@ -262,6 +266,7 @@
             Column3.HeaderText = "Harga / Hari";
             Column3.MinimumWidth = 8;
             Column3.Name = "Column3";
+            Column3.ReadOnly = true;
             Column3.Width = 197;
             // 
             // Column4
@@ -269,6 +274,7 @@
             Column4.HeaderText = "Kategori";
             Column4.MinimumWidth = 8;
             Column4.Name = "Column4";
+            Column4.ReadOnly = true;
             Column4.Width = 150;
             // 
             // Column5
@@ -276,6 +282,7 @@
             Column5.HeaderText = "Status";
             Column5.MinimumWidth = 8;
             Column5.Name = "Column5";
+            Column5.ReadOnly = true;
             Column5.Width = 150;
             // 
             // pnlToolbar
