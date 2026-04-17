@@ -63,6 +63,7 @@ namespace Rental_app
             btn_laporan.TabIndex = 7;
             btn_laporan.Text = "⚙️  Pengaturan";
             btn_laporan.UseVisualStyleBackColor = false;
+            btn_laporan.Visible = false;
             btn_laporan.Click += btn_laporan_Click;
             // 
             // btn_dataPelanggan
@@ -79,6 +80,7 @@ namespace Rental_app
             btn_dataPelanggan.Size = new Size(240, 50);
             btn_dataPelanggan.TabIndex = 6;
             btn_dataPelanggan.Text = "👥  Data Pelanggan";
+            btn_dataPelanggan.TextAlign = ContentAlignment.MiddleLeft;
             btn_dataPelanggan.UseVisualStyleBackColor = false;
             btn_dataPelanggan.Click += btn_dataPelanggan_Click;
             // 
