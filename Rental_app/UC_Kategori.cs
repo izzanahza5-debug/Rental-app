@@ -1,3 +1,6 @@
+using MySql.Data.MySqlClient;
+using System.Data;
+
 namespace Rental_app
 {
     public partial class UC_Kategori : UserControl
@@ -9,9 +12,32 @@ namespace Rental_app
 
         private void UC_Kategori_Load(object sender, EventArgs e)
         {
+            
         }
 
+        public void TampilDataMobil()
+        {
+            KonekDb db = new KonekDb();
+            try
+            {
+                db.OpenConnection();
+                string query = "SELECT * FROM mobil";
+                MySqlDataAdapter adapter = new MySqlDataAdapter(query, db.koneksi);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
 
+                // Asumsikan kamu punya DataGridView bernama gridKategori
+                gridKategori.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                db.CloseConnection();
+            }
+        }
 
         private void btnTambah_Click(object sender, EventArgs e)
         {
@@ -96,7 +122,7 @@ namespace Rental_app
 
         private void gridKategori_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            TampilDataMobil();
         }
 
         private void button2_Click(object sender, EventArgs e)

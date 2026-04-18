@@ -4,6 +4,9 @@
     <Compile Update="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UC_createPelanggan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UC_Detail.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -36,22 +36,13 @@
             textBox1 = new TextBox();
             lblTitle = new Label();
             dataGridView1 = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
             Column5 = new DataGridViewTextBoxColumn();
-            panel2 = new Panel();
-            label10 = new Label();
-            label11 = new Label();
-            textBox2 = new TextBox();
-            label1 = new Label();
-            textBox5 = new TextBox();
-            label2 = new Label();
-            textBox6 = new TextBox();
+            Column4 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            Column1 = new DataGridViewTextBoxColumn();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -95,6 +86,7 @@
             button1.TabIndex = 8;
             button1.Text = "➕ Tambah";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // btnEdit
             // 
@@ -126,9 +118,10 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(0, 19);
+            textBox1.Location = new Point(22, 10);
+            textBox1.Multiline = true;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(370, 31);
+            textBox1.Size = new Size(296, 40);
             textBox1.TabIndex = 0;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
@@ -153,124 +146,53 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(1058, 412);
+            dataGridView1.Size = new Size(1400, 412);
             dataGridView1.TabIndex = 2;
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "NAMA & DETAIL";
-            Column1.MinimumWidth = 8;
-            Column1.Name = "Column1";
-            Column1.Width = 250;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "KONTAK";
-            Column2.MinimumWidth = 8;
-            Column2.Name = "Column2";
-            Column2.Width = 200;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "ALAMAT";
-            Column3.MinimumWidth = 8;
-            Column3.Name = "Column3";
-            Column3.Width = 200;
-            // 
-            // Column4
-            // 
-            Column4.HeaderText = "TOTAL SEWA";
-            Column4.MinimumWidth = 8;
-            Column4.Name = "Column4";
-            Column4.Width = 200;
             // 
             // Column5
             // 
             Column5.HeaderText = "STATUS";
             Column5.MinimumWidth = 8;
             Column5.Name = "Column5";
-            Column5.Width = 144;
+            Column5.ReadOnly = true;
+            Column5.Width = 210;
             // 
-            // panel2
+            // Column4
             // 
-            panel2.BackColor = SystemColors.ButtonHighlight;
-            panel2.BorderStyle = BorderStyle.FixedSingle;
-            panel2.Controls.Add(label2);
-            panel2.Controls.Add(textBox6);
-            panel2.Controls.Add(label1);
-            panel2.Controls.Add(textBox5);
-            panel2.Controls.Add(label11);
-            panel2.Controls.Add(label10);
-            panel2.Controls.Add(textBox2);
-            panel2.Location = new Point(1084, 178);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(336, 412);
-            panel2.TabIndex = 3;
-            panel2.Visible = false;
+            Column4.HeaderText = "TOTAL SEWA";
+            Column4.MinimumWidth = 8;
+            Column4.Name = "Column4";
+            Column4.ReadOnly = true;
+            Column4.Width = 220;
             // 
-            // label10
+            // Column3
             // 
-            label10.AutoSize = true;
-            label10.Location = new Point(16, 76);
-            label10.Name = "label10";
-            label10.Size = new Size(110, 25);
-            label10.TabIndex = 19;
-            label10.Text = "Nama Mobil";
+            Column3.HeaderText = "ALAMAT";
+            Column3.MinimumWidth = 8;
+            Column3.Name = "Column3";
+            Column3.ReadOnly = true;
+            Column3.Width = 250;
             // 
-            // label11
+            // Column2
             // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic);
-            label11.Location = new Point(84, 18);
-            label11.Name = "label11";
-            label11.Size = new Size(170, 32);
-            label11.TabIndex = 18;
-            label11.Text = "Formulir Input";
+            Column2.HeaderText = "KONTAK";
+            Column2.MinimumWidth = 8;
+            Column2.Name = "Column2";
+            Column2.ReadOnly = true;
+            Column2.Width = 306;
             // 
-            // textBox2
+            // Column1
             // 
-            textBox2.Location = new Point(16, 104);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(295, 31);
-            textBox2.TabIndex = 16;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(16, 152);
-            label1.Name = "label1";
-            label1.Size = new Size(110, 25);
-            label1.TabIndex = 21;
-            label1.Text = "Nama Mobil";
-            // 
-            // textBox5
-            // 
-            textBox5.Location = new Point(16, 180);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(295, 31);
-            textBox5.TabIndex = 20;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(16, 233);
-            label2.Name = "label2";
-            label2.Size = new Size(110, 25);
-            label2.TabIndex = 23;
-            label2.Text = "Nama Mobil";
-            // 
-            // textBox6
-            // 
-            textBox6.Location = new Point(16, 261);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(295, 31);
-            textBox6.TabIndex = 22;
+            Column1.HeaderText = "NAMA & DETAIL";
+            Column1.MinimumWidth = 8;
+            Column1.Name = "Column1";
+            Column1.ReadOnly = true;
+            Column1.Width = 350;
             // 
             // UC_Pelanggan
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(panel2);
             Controls.Add(dataGridView1);
             Controls.Add(lblTitle);
             Controls.Add(panel1);
@@ -279,8 +201,6 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -300,13 +220,5 @@
         private DataGridViewTextBoxColumn Column3;
         private DataGridViewTextBoxColumn Column4;
         private DataGridViewTextBoxColumn Column5;
-        private Panel panel2;
-        private Label label11;
-        private Label label10;
-        private TextBox textBox2;
-        private Label label2;
-        private TextBox textBox6;
-        private Label label1;
-        private TextBox textBox5;
     }
 }

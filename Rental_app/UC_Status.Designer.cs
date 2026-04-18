@@ -34,6 +34,7 @@
             txt_search = new TextBox();
             button3 = new Button();
             panel1 = new Panel();
+            button2 = new Button();
             label11 = new Label();
             label9 = new Label();
             label10 = new Label();
@@ -48,7 +49,6 @@
             flowLayoutPanel1 = new FlowLayoutPanel();
             label2 = new Label();
             label1 = new Label();
-            button2 = new Button();
             pnlToolbar.SuspendLayout();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
@@ -95,9 +95,10 @@
             // 
             // txt_search
             // 
-            txt_search.Location = new Point(15, 20);
+            txt_search.Location = new Point(15, 10);
+            txt_search.Multiline = true;
             txt_search.Name = "txt_search";
-            txt_search.Size = new Size(314, 31);
+            txt_search.Size = new Size(314, 49);
             txt_search.TabIndex = 6;
             // 
             // button3
@@ -134,6 +135,19 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1365, 150);
             panel1.TabIndex = 19;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.FromArgb(0, 58, 158);
+            button2.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
+            button2.ForeColor = SystemColors.ButtonHighlight;
+            button2.Location = new Point(1140, 60);
+            button2.Name = "button2";
+            button2.Size = new Size(180, 62);
+            button2.TabIndex = 11;
+            button2.Text = "Lihat Detail";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // label11
             // 
@@ -289,19 +303,6 @@
             label1.Size = new Size(116, 28);
             label1.TabIndex = 0;
             label1.Text = "ID: TRX-001";
-            // 
-            // button2
-            // 
-            button2.BackColor = Color.FromArgb(0, 58, 158);
-            button2.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
-            button2.ForeColor = SystemColors.ButtonHighlight;
-            button2.Location = new Point(1140, 60);
-            button2.Name = "button2";
-            button2.Size = new Size(180, 62);
-            button2.TabIndex = 11;
-            button2.Text = "Lihat Detail";
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += button2_Click;
             // 
             // UC_Status
             // 
