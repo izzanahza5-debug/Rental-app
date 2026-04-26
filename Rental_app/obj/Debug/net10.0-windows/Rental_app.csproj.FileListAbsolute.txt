@@ -60,3 +60,5 @@ C:\Users\Smuhblig\source\repos\Rental_app\Rental_app\bin\Debug\net10.0-windows\r
 C:\Users\Smuhblig\source\repos\Rental_app\Rental_app\obj\Debug\net10.0-windows\Rental_app.csproj.AssemblyReference.cache
 C:\Users\Smuhblig\source\repos\Rental_app\Rental_app\obj\Debug\net10.0-windows\Rental_app.csproj.Up2Date
 C:\Users\Smuhblig\source\repos\Rental_app\Rental_app\obj\Debug\net10.0-windows\Rental_app.UC_createPelanggan.resources
+C:\Users\Smuhblig\source\repos\Rental_app\Rental_app\obj\Debug\net10.0-windows\Rental_app.UC_editPelanggan.resources
+C:\Users\Smuhblig\source\repos\Rental_app\Rental_app\obj\Debug\net10.0-windows\Rental_app.UC__TransaksiPenyewaan.resources

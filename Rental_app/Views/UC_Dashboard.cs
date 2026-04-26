@@ -2,6 +2,8 @@ namespace Rental_app
 {
     public partial class UC_Dashboard : UserControl
     {
+        private UserController userController = new UserController();
+        private DashboardController dashboardController = new DashboardController();
         public UC_Dashboard()
         {
             InitializeComponent();
@@ -48,10 +50,15 @@ namespace Rental_app
 
         private void UC_Dashboard_Load(object sender, EventArgs e)
         {
-
+            gridTransaksi.DataSource = userController.GetUser();
+            label3.Text = dashboardController.totalMobil().ToString();
         }
 
 
+        private void gridTransaksi_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // TODO: implementasi sesuai kebutuhan
+        }
 
         private void listPopuler_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -60,7 +67,7 @@ namespace Rental_app
 
         private void label2_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void label3_Click(object sender, EventArgs e)

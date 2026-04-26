@@ -34,10 +34,10 @@ namespace Rental_app
             // panelSidebar
             // 
             panelSidebar.BackColor = Color.FromArgb(41, 128, 185);
+            panelSidebar.Controls.Add(btn_transaksi);
+            panelSidebar.Controls.Add(btn_status);
             panelSidebar.Controls.Add(btn_laporan);
             panelSidebar.Controls.Add(btn_dataPelanggan);
-            panelSidebar.Controls.Add(btn_status);
-            panelSidebar.Controls.Add(btn_transaksi);
             panelSidebar.Controls.Add(btn_daftarMobil);
             panelSidebar.Controls.Add(btn_kategori);
             panelSidebar.Controls.Add(btn_dashboard);
@@ -75,7 +75,7 @@ namespace Rental_app
             btn_dataPelanggan.FlatStyle = FlatStyle.Flat;
             btn_dataPelanggan.Font = new Font("Segoe UI", 11F);
             btn_dataPelanggan.ForeColor = Color.White;
-            btn_dataPelanggan.Location = new Point(10, 400);
+            btn_dataPelanggan.Location = new Point(14, 276);
             btn_dataPelanggan.Name = "btn_dataPelanggan";
             btn_dataPelanggan.Size = new Size(240, 50);
             btn_dataPelanggan.TabIndex = 6;
@@ -93,7 +93,7 @@ namespace Rental_app
             btn_status.FlatStyle = FlatStyle.Flat;
             btn_status.Font = new Font("Segoe UI", 11F);
             btn_status.ForeColor = Color.White;
-            btn_status.Location = new Point(10, 340);
+            btn_status.Location = new Point(10, 392);
             btn_status.Name = "btn_status";
             btn_status.Size = new Size(240, 50);
             btn_status.TabIndex = 5;
@@ -110,7 +110,7 @@ namespace Rental_app
             btn_transaksi.FlatStyle = FlatStyle.Flat;
             btn_transaksi.Font = new Font("Segoe UI", 11F);
             btn_transaksi.ForeColor = Color.White;
-            btn_transaksi.Location = new Point(10, 280);
+            btn_transaksi.Location = new Point(10, 332);
             btn_transaksi.Name = "btn_transaksi";
             btn_transaksi.Size = new Size(240, 50);
             btn_transaksi.TabIndex = 4;

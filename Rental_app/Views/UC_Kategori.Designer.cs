@@ -21,8 +21,6 @@ namespace Rental_app
             btnEdit = new Button();
             btnHapus = new Button();
             gridKategori = new DataGridView();
-            colNama = new DataGridViewTextBoxColumn();
-            colDeskripsi = new DataGridViewTextBoxColumn();
             colID = new DataGridViewTextBoxColumn();
             colHarga = new DataGridViewTextBoxColumn();
             panel_input = new Panel();
@@ -121,7 +119,6 @@ namespace Rental_app
             gridKategori.AllowUserToDeleteRows = false;
             gridKategori.BackgroundColor = Color.White;
             gridKategori.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridKategori.Columns.AddRange(new DataGridViewColumn[] { colNama, colDeskripsi });
             gridKategori.EditMode = DataGridViewEditMode.EditProgrammatically;
             gridKategori.Location = new Point(20, 168);
             gridKategori.Name = "gridKategori";
@@ -130,22 +127,6 @@ namespace Rental_app
             gridKategori.Size = new Size(665, 707);
             gridKategori.TabIndex = 2;
             gridKategori.CellContentClick += gridKategori_CellContentClick;
-            // 
-            // colNama
-            // 
-            colNama.HeaderText = "Nama Kategori";
-            colNama.MinimumWidth = 8;
-            colNama.Name = "colNama";
-            colNama.ReadOnly = true;
-            colNama.Width = 400;
-            // 
-            // colDeskripsi
-            // 
-            colDeskripsi.HeaderText = "Kode Kategori";
-            colDeskripsi.MinimumWidth = 8;
-            colDeskripsi.Name = "colDeskripsi";
-            colDeskripsi.ReadOnly = true;
-            colDeskripsi.Width = 200;
             // 
             // colID
             // 
@@ -260,7 +241,7 @@ namespace Rental_app
             panel_edit.Controls.Add(label5);
             panel_edit.Controls.Add(txtKodeEdit);
             panel_edit.Controls.Add(label6);
-            panel_edit.Location = new Point(1038, 169);
+            panel_edit.Location = new Point(1047, 168);
             panel_edit.Name = "panel_edit";
             panel_edit.Size = new Size(356, 359);
             panel_edit.TabIndex = 4;
@@ -367,8 +348,6 @@ namespace Rental_app
         private Button btnHapus;
         private DataGridView gridKategori;
         private DataGridViewTextBoxColumn colID;
-        private DataGridViewTextBoxColumn colNama;
-        private DataGridViewTextBoxColumn colDeskripsi;
         private DataGridViewTextBoxColumn colHarga;
         private Panel panel_input;
         private Label label2;

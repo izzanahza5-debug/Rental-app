@@ -83,7 +83,7 @@ namespace Rental_app
         private void btn_transaksi_Click_1(object sender, EventArgs e)
         {
             // Transaksi
-            ShowPage(new UC_Transaksi());
+            ShowPage(new UC__TransaksiPenyewaan());
         }
 
         private void btn_status_Click(object sender, EventArgs e)

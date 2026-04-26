@@ -8,11 +8,29 @@ namespace Rental_app
         public UC_Kategori()
         {
             InitializeComponent();
+           
         }
+        private KategoriController KategoriController = new KategoriController();
 
         private void UC_Kategori_Load(object sender, EventArgs e)
         {
-            
+            gridKategori.DataSource = KategoriController.GetKategori();
+            gridKategori.Columns["id"].Visible = false;
+        }
+
+        private void LoadDataToGrid()
+        {
+            try
+            {
+                var data = KategoriController.GetKategori();
+
+                gridKategori.DataSource = null; // Clear existing data
+                gridKategori.DataSource = data;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
         public void TampilDataMobil()
@@ -50,8 +68,8 @@ namespace Rental_app
 
             if (gridKategori.SelectedRows.Count > 0)
             {
-                string kodeKategori = gridKategori.SelectedRows[0].Cells[1].Value.ToString();
-                string namaKategori = gridKategori.SelectedRows[0].Cells[0].Value.ToString();
+                string kodeKategori = gridKategori.SelectedRows[0].Cells[2].Value.ToString();
+                string namaKategori = gridKategori.SelectedRows[0].Cells[1].Value.ToString();
                 txtNamaEdit.Text = namaKategori;
                 txtKodeEdit.Text = kodeKategori;
                 panel_edit.Visible = true;
@@ -67,9 +85,18 @@ namespace Rental_app
         {
             if (gridKategori.SelectedRows.Count > 0)
             {
-                gridKategori.Rows.RemoveAt(gridKategori.SelectedRows[0].Index);
-                panel_edit.Visible = false;
-                MessageBox.Show("Kategori berhasil dihapus!");
+                int id = Convert.ToInt32(gridKategori.SelectedRows[0].Cells["id"].Value.ToString());
+                bool berhasil = KategoriController.DeleteKategori(id);
+                if (berhasil)
+                {
+                    gridKategori.DataSource = KategoriController.GetKategori();
+       
+
+                }
+                else
+                {
+                    MessageBox.Show("Gagal dihapus!");
+                }
             }
             else
             {
@@ -87,23 +114,15 @@ namespace Rental_app
             string namaKategori = txt_nama.Text;
             string kodeKategori = txt_kode.Text;
 
-            if (namaKategori == "" || kodeKategori == "")
+            if (KategoriController.CreateKategori(kodeKategori, namaKategori) != null)
             {
-                MessageBox.Show("Nama dan Kode kategori tidak boleh kosong!");
-                return;
+                gridKategori.DataSource = KategoriController.GetKategori();
+                MessageBox.Show("Berhasil di tambahkan");
             }
-
-            if (gridKategori.SelectedRows.Count > 0)
+            else
             {
-                gridKategori.SelectedRows[0].Cells[0].Value = namaKategori;
-                gridKategori.SelectedRows[0].Cells[1].Value = kodeKategori;
-                MessageBox.Show("Kategori berhasil diperbarui!");
-                txt_nama.Clear();
-                txt_kode.Clear();
-                return;
+                MessageBox.Show("gagal menambahkan kategori!");
             }
-
-            gridKategori.Rows.Add(namaKategori, kodeKategori);
 
             txt_nama.Clear();
             txt_kode.Clear();
@@ -132,19 +151,24 @@ namespace Rental_app
 
         private void btn_edit_Click(object sender, EventArgs e)
         {
-            string namaKategori = txtNamaEdit.Text;
-            string kodeKategori = txtKodeEdit.Text;
+            //var idValue = gridKategori.CurrentRow.Cells["id"].Value;
+            //MessageBox.Show($"ID yang akan diupdate: {idValue} (Type: {idValue?.GetType()})");
+            string namaKategori = txtKodeEdit.Text;
+            string kodeKategori = txtNamaEdit.Text;
 
-            if (namaKategori == "" || kodeKategori == "")
+
+            bool success = KategoriController.UpdateKategori(
+                id: Convert.ToInt32(gridKategori.CurrentRow.Cells["id"].Value),
+                kode_kategori: kodeKategori,
+                nama_kategori: namaKategori
+                );
+
+            if (success)
             {
-                MessageBox.Show("Nama dan Kode kategori tidak boleh kosong!");
+                gridKategori.DataSource = KategoriController.GetKategori();
+                panel_edit.Visible = false;
                 return;
             }
-
-            gridKategori.SelectedRows[0].Cells[0].Value = namaKategori;
-            gridKategori.SelectedRows[0].Cells[1].Value = kodeKategori;
-            MessageBox.Show("Kategori berhasil diperbarui!");
-            panel_edit.Visible = false;
         }
 
         private void lblTitle_Click(object sender, EventArgs e)

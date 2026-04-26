@@ -14,5 +14,26 @@ namespace Rental_app
         {
             InitializeComponent();
         }
+
+        private UserControl currentPage = null;
+       
+
+        private void ShowPage(UserControl Page)
+        {
+            if(currentPage != null)
+            {
+                this.Controls.Remove(currentPage);
+                currentPage.Dispose();
+            }
+
+            currentPage = Page;
+            Page.Dock = DockStyle.Fill;
+            this.Controls.Add(Page);
+            this.Controls.SetChildIndex(Page, 0);
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ShowPage(new UC_Pelanggan());
+        }
     }
 }

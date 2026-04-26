@@ -10,19 +10,25 @@
     <Compile Update="UC_Detail.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UC_Pelanggan.cs">
+    <Compile Update="UC_editPelanggan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UC__TransaksiPenyewaan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UC_Pelanggan.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UC_Status.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UC_Dashboard.cs">
+    <Compile Update="Views\UC_Dashboard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UC_Home.cs">
+    <Compile Update="Views\UC_Home.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UC_Kategori.cs">
+    <Compile Update="Views\UC_Kategori.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UC_Template.cs">

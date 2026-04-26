@@ -42,13 +42,8 @@
             comboBox2 = new ComboBox();
             txt_nama = new TextBox();
             txt_plat = new TextBox();
-            txt_hari = new TextBox();
+            txt_harga = new TextBox();
             dataGridView1 = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
             pnlToolbar = new Panel();
             button3 = new Button();
             btnEdit = new Button();
@@ -108,7 +103,7 @@
             panel1.Controls.Add(comboBox2);
             panel1.Controls.Add(txt_nama);
             panel1.Controls.Add(txt_plat);
-            panel1.Controls.Add(txt_hari);
+            panel1.Controls.Add(txt_harga);
             panel1.Controls.Add(comboBox1);
             panel1.Location = new Point(937, 168);
             panel1.Name = "panel1";
@@ -223,20 +218,19 @@
             txt_plat.Size = new Size(356, 31);
             txt_plat.TabIndex = 15;
             // 
-            // txt_hari
+            // txt_harga
             // 
-            txt_hari.Location = new Point(52, 257);
-            txt_hari.Name = "txt_hari";
-            txt_hari.Size = new Size(356, 31);
-            txt_hari.TabIndex = 14;
-            txt_hari.TextChanged += textBox1_TextChanged;
+            txt_harga.Location = new Point(52, 257);
+            txt_harga.Name = "txt_harga";
+            txt_harga.Size = new Size(356, 31);
+            txt_harga.TabIndex = 14;
+            txt_harga.TextChanged += textBox1_TextChanged;
             // 
             // dataGridView1
             // 
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.BackgroundColor = SystemColors.HighlightText;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5 });
             dataGridView1.Location = new Point(20, 168);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
@@ -244,46 +238,6 @@
             dataGridView1.Size = new Size(911, 532);
             dataGridView1.TabIndex = 15;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "Nama Mobil";
-            Column1.MinimumWidth = 8;
-            Column1.Name = "Column1";
-            Column1.ReadOnly = true;
-            Column1.Width = 200;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Nomor Plat";
-            Column2.MinimumWidth = 8;
-            Column2.Name = "Column2";
-            Column2.ReadOnly = true;
-            Column2.Width = 150;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "Harga / Hari";
-            Column3.MinimumWidth = 8;
-            Column3.Name = "Column3";
-            Column3.ReadOnly = true;
-            Column3.Width = 197;
-            // 
-            // Column4
-            // 
-            Column4.HeaderText = "Kategori";
-            Column4.MinimumWidth = 8;
-            Column4.Name = "Column4";
-            Column4.ReadOnly = true;
-            Column4.Width = 150;
-            // 
-            // Column5
-            // 
-            Column5.HeaderText = "Status";
-            Column5.MinimumWidth = 8;
-            Column5.Name = "Column5";
-            Column5.ReadOnly = true;
-            Column5.Width = 150;
             // 
             // pnlToolbar
             // 
@@ -515,7 +469,7 @@
         private ComboBox comboBox2;
         private TextBox txt_nama;
         private TextBox txt_plat;
-        private TextBox txt_hari;
+        private TextBox txt_harga;
         private Label lbInput;
         private Label label1;
         private Label label2;
@@ -525,11 +479,6 @@
         private Button button2;
         private Button button1;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column5;
         private Panel pnlToolbar;
         private Button button3;
         private Button btnEdit;

@@ -1,16 +1,19 @@
-﻿using System;
+﻿using Org.BouncyCastle.Asn1.Cmp;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using static KategoriController;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Rental_app
 {
     public partial class UC_Home : UserControl
     {
+        private MobilController MobilController = new MobilController();
         public UC_Home()
         {
             InitializeComponent();
@@ -38,6 +41,8 @@ namespace Rental_app
 
             comboBox1.SelectedIndex = 0;
 
+            dataGridView1.DataSource = MobilController.GetMobil();
+            dataGridView1.Columns["id"].Visible = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -102,32 +107,33 @@ namespace Rental_app
 
         private void button1_Click_2(object sender, EventArgs e)
         {
-            string namaMobil = txt_nama.Text;
-            string nomorPlat = txt_plat.Text;
-            string HargaSewa = txt_hari.Text;
-            string statusMobil = comboBox2.SelectedItem.ToString();
-            string kategoriMobil = comboBox1.SelectedItem.ToString();
-
-            if (namaMobil == "" || nomorPlat == "" || HargaSewa == "")
+            string nama_mobil = txt_nama.Text;      // sesuaikan nama textbox
+            string nomor_plat = txt_plat.Text;
+            decimal harga;
+            if (!decimal.TryParse(txt_harga.Text, out harga))
             {
-                MessageBox.Show("Nama, Nomor Plat, dan Harga Sewa tidak boleh kosong!");
+                MessageBox.Show("Harga harus berupa angka!");
                 return;
             }
+            string kategori = comboBox1.SelectedItem?.ToString() ?? "";
+            string status = comboBox2.SelectedItem?.ToString() ?? "";
 
-            if (HargaSewa != "" && !decimal.TryParse(HargaSewa, out _))
+            if (MobilController.CreateMobil(nama_mobil, nomor_plat, harga, kategori, status) != null)
             {
-                MessageBox.Show("Harga Sewa harus berupa angka!");
-                return;
+                dataGridView1.DataSource = MobilController.GetMobil();
+                MessageBox.Show("Berhasil ditambahkan");
+            }
+            else
+            {
+                MessageBox.Show("gagal menambahkan mobil!");
             }
 
-            dataGridView1.Rows.Add(namaMobil, nomorPlat, HargaSewa, kategoriMobil, statusMobil);
-
-            txt_nama.Clear();
-            txt_plat.Clear();
-            txt_hari.Clear();
-
+            nama_mobil = "";
+            nomor_plat = "";
+            harga = 0;
+            kategori = "";
+            status = "";
         }
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -156,11 +162,11 @@ namespace Rental_app
             {
                 panel1.Visible = false;
                 panel2.Visible = true;
-                string namaMobil = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-                string nomorPlat = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
-                string HargaSewa = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
-                string statusMobil = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
-                string kategoriMobil = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
+                string namaMobil = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+                string nomorPlat = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+                string HargaSewa = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
+                string statusMobil = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
+                string kategoriMobil = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
 
                 textBox1.Text = namaMobil;
                 textBox2.Text = nomorPlat;
@@ -188,32 +194,39 @@ namespace Rental_app
             string statusMobil = comboBox3.SelectedItem.ToString();
             string kategoriMobil = comboBox4.SelectedItem.ToString();
 
-            if (namaMobil == "" || nomorPlat == "" || HargaSewa == "")
-            {
-                MessageBox.Show("Nama, Nomor Plat, dan Harga Sewa tidak boleh kosong!");
-                return;
-            }
+            bool berhasil = MobilController.UpdateMobil(
+        id: (int)dataGridView1.CurrentRow.Cells["id"].Value, // ambil id dari baris yang dipilih
+        nama_mobil: textBox1.Text,
+        nomor_plat: textBox2.Text,
+        harga: Convert.ToDecimal(textBox3.Text),
+        kategori: comboBox4.SelectedItem.ToString(),
+        status: comboBox3.SelectedItem.ToString()
+    );
 
-            if (HargaSewa != "" && !decimal.TryParse(HargaSewa, out _))
+            if (berhasil)
             {
-                MessageBox.Show("Harga Sewa harus berupa angka!");
-                return;
+                // Refresh tampilan data di DataGridView
+                dataGridView1.DataSource = MobilController.GetMobil();
             }
-
-            dataGridView1.SelectedRows[0].Cells[0].Value = namaMobil;
-            dataGridView1.SelectedRows[0].Cells[1].Value = nomorPlat;
-            dataGridView1.SelectedRows[0].Cells[2].Value = HargaSewa;
-            dataGridView1.SelectedRows[0].Cells[4].Value = statusMobil;
-            dataGridView1.SelectedRows[0].Cells[3].Value = kategoriMobil;
 
             panel2.Visible = false;
         }
 
         private void btnHapus_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0) { 
-                dataGridView1.Rows.RemoveAt(dataGridView1.SelectedRows[0].Index);
-                return;
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int id = (int)dataGridView1.SelectedRows[0].Cells["id"].Value;
+                bool berhasil = MobilController.deleteMobil(id);
+                if (berhasil)
+                {
+                    dataGridView1.DataSource = MobilController.GetMobil();
+                    MessageBox.Show("Mobil berhasil dihapus!");
+                }
+                else
+                {
+                    MessageBox.Show("Gagal menghapus mobil!");
+                }
             }
             else
             {
