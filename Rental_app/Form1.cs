@@ -40,9 +40,9 @@ namespace Rental_app
             }
         }
 
-        //<summary>
+        /// <summary>
         /// Method untuk menampilkan halaman UserControl
-        //</summary>
+        /// </summary>
         private void ShowPage(UserControl page)
         {
             // Hapus halaman sebelumnya
@@ -125,8 +125,14 @@ namespace Rental_app
 
         }
     }
-    public class logHitung()
-    {
 
+    /// <summary>
+    /// Helper class untuk kalkulasi hitung-hitungan rental
+    /// </summary>
+    public class logHitung
+    {
+        public logHitung()
+        {
+        }
     }
 }

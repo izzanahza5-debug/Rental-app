@@ -164,7 +164,7 @@
             label3.Name = "label3";
             label3.Size = new Size(109, 25);
             label3.TabIndex = 21;
-            label3.Text = "Harga / Hari";
+            label3.Text = "harga / Hari";
             label3.Click += label3_Click;
             // 
             // label2
@@ -371,7 +371,7 @@
             label8.Name = "label8";
             label8.Size = new Size(109, 25);
             label8.TabIndex = 21;
-            label8.Text = "Harga / Hari";
+            label8.Text = "harga / Hari";
             // 
             // label9
             // 
@@ -438,6 +438,7 @@
             comboBox4.Name = "comboBox4";
             comboBox4.Size = new Size(356, 33);
             comboBox4.TabIndex = 13;
+            comboBox4.SelectedIndexChanged += comboBox4_SelectedIndexChanged;
             // 
             // UC_Home
             // 

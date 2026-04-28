@@ -1,4 +1,5 @@
-﻿using Org.BouncyCastle.Asn1.Cmp;
+﻿using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Asn1.Cmp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,16 +19,40 @@ namespace Rental_app
         {
             InitializeComponent();
 
+            string connectionString = "server=localhost;database=rental_db;uid=root;pwd=;";
+            string query = "SELECT id, nama_kategori FROM kategori";
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    // Bind data ke ComboBox
+                    comboBox4.DisplayMember = "nama_kategori"; // Kolom yang ditampilkan
+                    comboBox4.ValueMember = "id";           // Nilai tersembunyi
+                    comboBox4.DataSource = dt;
+                    comboBox1.DisplayMember = "nama_kategori"; // Kolom yang ditampilkan
+                    comboBox1.ValueMember = "id";           // Nilai tersembunyi
+                    comboBox1.DataSource = dt;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+            
 
             comboBox3.Items.Add("Dipinjam");
             comboBox3.Items.Add("Tersedia");
             comboBox3.Items.Add("Maintenence");
             comboBox3.SelectedIndex = 1;
 
-            comboBox4.Items.Add("SUV");
-            comboBox4.Items.Add("Sedan");
-            comboBox4.Items.Add("Hatchback");
-            comboBox4.SelectedIndex = 0;
+
+            
 
             comboBox2.Items.Add("Dipinjam");
             comboBox2.Items.Add("Tersedia");
@@ -35,11 +60,10 @@ namespace Rental_app
 
             comboBox2.SelectedIndex = 1;
 
-            comboBox1.Items.Add("SUV");
-            comboBox1.Items.Add("Sedan");
-            comboBox1.Items.Add("Hatchback");
+           
 
             comboBox1.SelectedIndex = 0;
+            comboBox4.SelectedIndex = 0;
 
             dataGridView1.DataSource = MobilController.GetMobil();
             dataGridView1.Columns["id"].Visible = false;
@@ -112,10 +136,10 @@ namespace Rental_app
             decimal harga;
             if (!decimal.TryParse(txt_harga.Text, out harga))
             {
-                MessageBox.Show("Harga harus berupa angka!");
+                MessageBox.Show("harga harus berupa angka!");
                 return;
             }
-            string kategori = comboBox1.SelectedItem?.ToString() ?? "";
+            string kategori = comboBox1.SelectedValue?.ToString() ?? "";
             string status = comboBox2.SelectedItem?.ToString() ?? "";
 
             if (MobilController.CreateMobil(nama_mobil, nomor_plat, harga, kategori, status) != null)
@@ -128,11 +152,11 @@ namespace Rental_app
                 MessageBox.Show("gagal menambahkan mobil!");
             }
 
-            nama_mobil = "";
-            nomor_plat = "";
-            harga = 0;
-            kategori = "";
-            status = "";
+            txt_nama.Clear();
+            txt_plat.Clear();
+            txt_harga.Clear();
+            comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 1;
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -164,15 +188,15 @@ namespace Rental_app
                 panel2.Visible = true;
                 string namaMobil = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
                 string nomorPlat = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
-                string HargaSewa = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
-                string statusMobil = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
-                string kategoriMobil = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
+                string hargaSewa = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
+                string statusMobil = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
+                string kategoriMobil = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
 
                 textBox1.Text = namaMobil;
                 textBox2.Text = nomorPlat;
-                textBox3.Text = HargaSewa;
+                textBox3.Text = hargaSewa;
                 comboBox3.Items.Add(statusMobil);
-                comboBox4.Items.Add(kategoriMobil);
+                comboBox4.Text = kategoriMobil;
             }
             else
             {
@@ -190,16 +214,16 @@ namespace Rental_app
         {
             string namaMobil = textBox1.Text;
             string nomorPlat = textBox2.Text;
-            string HargaSewa = textBox3.Text;
+            string hargaSewa = textBox3.Text;
             string statusMobil = comboBox3.SelectedItem.ToString();
-            string kategoriMobil = comboBox4.SelectedItem.ToString();
+            string kategoriMobil = comboBox4.SelectedValue.ToString();
 
             bool berhasil = MobilController.UpdateMobil(
         id: (int)dataGridView1.CurrentRow.Cells["id"].Value, // ambil id dari baris yang dipilih
         nama_mobil: textBox1.Text,
         nomor_plat: textBox2.Text,
         harga: Convert.ToDecimal(textBox3.Text),
-        kategori: comboBox4.SelectedItem.ToString(),
+        kategori: comboBox4.SelectedValue.ToString(),
         status: comboBox3.SelectedItem.ToString()
     );
 
@@ -232,6 +256,11 @@ namespace Rental_app
             {
                 MessageBox.Show("Pilih mobil terlebih dahulu!");
             }
+        }
+
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

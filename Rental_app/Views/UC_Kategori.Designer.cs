@@ -22,7 +22,7 @@ namespace Rental_app
             btnHapus = new Button();
             gridKategori = new DataGridView();
             colID = new DataGridViewTextBoxColumn();
-            colHarga = new DataGridViewTextBoxColumn();
+            colharga = new DataGridViewTextBoxColumn();
             panel_input = new Panel();
             button2 = new Button();
             txt_nama = new TextBox();
@@ -134,11 +134,11 @@ namespace Rental_app
             colID.Name = "colID";
             colID.Width = 150;
             // 
-            // colHarga
+            // colharga
             // 
-            colHarga.MinimumWidth = 8;
-            colHarga.Name = "colHarga";
-            colHarga.Width = 150;
+            colharga.MinimumWidth = 8;
+            colharga.Name = "colharga";
+            colharga.Width = 150;
             // 
             // panel_input
             // 
@@ -348,7 +348,7 @@ namespace Rental_app
         private Button btnHapus;
         private DataGridView gridKategori;
         private DataGridViewTextBoxColumn colID;
-        private DataGridViewTextBoxColumn colHarga;
+        private DataGridViewTextBoxColumn colharga;
         private Panel panel_input;
         private Label label2;
         private Label label3;

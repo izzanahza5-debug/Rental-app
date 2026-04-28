@@ -155,36 +155,45 @@ using System.Collections.Generic;
     {
         private string koneksi = "server=localhost;database=rental_db;uid=root;pwd=;";
 
-        public List<Mobil> GetMobil()
+    public List<Mobil> GetMobil()
+    {
+        List<Mobil> mobils = new List<Mobil>();
+        using (var conn = new MySqlConnection(koneksi))
         {
-            List<Mobil> mobils = new List<Mobil>();
-            using (var conn = new MySqlConnection(koneksi))
+            conn.Open();
+            string query = @"SELECT 
+                            m.id,
+                            m.nama_mobil,
+                            m.nomor_plat,
+                            m.harga,
+                            k.nama_kategori,
+                            m.status
+                         FROM daftar_mobil m
+                         JOIN kategori k ON m.kategori = k.id";
+
+            using (var cmd = new MySqlCommand(query, conn))
             {
-                conn.Open();
-                string query = "SELECT * FROM daftar_mobil";
-                using (var cmd = new MySqlCommand(query, conn))
+                using (var reader = cmd.ExecuteReader())
                 {
-                    using (var reader = cmd.ExecuteReader())
+                    while (reader.Read())
                     {
-                        while (reader.Read())
+                        mobils.Add(new Mobil
                         {
-                            mobils.Add(new Mobil
-                            {
-                                id = reader.GetInt32("id"),
-                                nama_mobil = reader["nama_mobil"].ToString(),
-                                nomor_plat = reader["nomor_plat"].ToString(),
-                                harga = Convert.ToDecimal(reader["harga"]),
-                                kategori = reader["kategori"].ToString(),
-                                status = reader["status"].ToString(),
-                            });
-                        }
+                            id = reader.GetInt32("id"),
+                            nama_mobil = reader["nama_mobil"].ToString(),
+                            nomor_plat = reader["nomor_plat"].ToString(),
+                            harga = Convert.ToDecimal(reader["harga"]),
+                            kategori = reader["nama_kategori"].ToString(), // 🔥 ini yang berubah
+                            status = reader["status"].ToString(),
+                        });
                     }
                 }
             }
-            return mobils;
         }
+        return mobils;
+    }
 
-        public bool CreateMobil(string nama_mobil, string nomor_plat, decimal harga, string kategori, string status)
+    public bool CreateMobil(string nama_mobil, string nomor_plat, decimal harga, string kategori, string status)
         {
             try
             {

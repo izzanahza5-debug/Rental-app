@@ -178,7 +178,7 @@ Done! ✅
 │ KATEGORI MOBIL                                  │
 ├─────────────────────────────────────────────────┤
 │ ✅ DataGridView (4 columns)                     │
-│    - ID, Nama, Deskripsi, Harga                │
+│    - ID, Nama, Deskripsi, harga                │
 │ ✅ Toolbar dengan buttons                       │
 │    - Tambah (Green)                            │
 │    - Edit (Blue)                               │
