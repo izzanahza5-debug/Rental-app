@@ -8,7 +8,7 @@ namespace Rental_app
         public UC_Kategori()
         {
             InitializeComponent();
-           
+            gridKategori.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         private KategoriController KategoriController = new KategoriController();
 

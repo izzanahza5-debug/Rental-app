@@ -13,7 +13,13 @@
     <Compile Update="UC_editPelanggan.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UC__TransaksiPenyewaan.cs">
+    <Compile Update="Views\UC__Pembayaran.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UC__PengembalianMobil.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\UC__TransaksiPenyewaan.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\UC_Pelanggan.cs">

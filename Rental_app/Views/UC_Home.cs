@@ -18,7 +18,7 @@ namespace Rental_app
         public UC_Home()
         {
             InitializeComponent();
-
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             string connectionString = "server=localhost;database=rental_db;uid=root;pwd=;";
             string query = "SELECT id, nama_kategori FROM kategori";
 

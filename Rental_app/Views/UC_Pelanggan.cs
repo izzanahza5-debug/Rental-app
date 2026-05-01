@@ -30,7 +30,7 @@ namespace Rental_app
         public UC_Pelanggan()
         {
             InitializeComponent();
-
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; ;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)

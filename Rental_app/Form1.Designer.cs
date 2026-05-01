@@ -16,10 +16,10 @@ namespace Rental_app
         private void InitializeComponent()
         {
             panelSidebar = new Panel();
+            btn_transaksi = new Button();
+            btn_status = new Button();
             btn_laporan = new Button();
             btn_dataPelanggan = new Button();
-            btn_status = new Button();
-            btn_transaksi = new Button();
             btn_daftarMobil = new Button();
             btn_kategori = new Button();
             btn_dashboard = new Button();
@@ -47,6 +47,40 @@ namespace Rental_app
             panelSidebar.Name = "panelSidebar";
             panelSidebar.Size = new Size(260, 728);
             panelSidebar.TabIndex = 0;
+            // 
+            // btn_transaksi
+            // 
+            btn_transaksi.BackColor = Color.FromArgb(41, 128, 185);
+            btn_transaksi.FlatAppearance.BorderSize = 0;
+            btn_transaksi.FlatAppearance.MouseDownBackColor = Color.FromArgb(30, 100, 160);
+            btn_transaksi.FlatAppearance.MouseOverBackColor = Color.FromArgb(52, 152, 219);
+            btn_transaksi.FlatStyle = FlatStyle.Flat;
+            btn_transaksi.Font = new Font("Segoe UI", 11F);
+            btn_transaksi.ForeColor = Color.White;
+            btn_transaksi.Location = new Point(10, 332);
+            btn_transaksi.Name = "btn_transaksi";
+            btn_transaksi.Size = new Size(240, 50);
+            btn_transaksi.TabIndex = 4;
+            btn_transaksi.Text = "💰  Transaksi";
+            btn_transaksi.UseVisualStyleBackColor = false;
+            btn_transaksi.Click += btn_transaksi_Click_1;
+            // 
+            // btn_status
+            // 
+            btn_status.BackColor = Color.FromArgb(41, 128, 185);
+            btn_status.FlatAppearance.BorderSize = 0;
+            btn_status.FlatAppearance.MouseDownBackColor = Color.FromArgb(30, 100, 160);
+            btn_status.FlatAppearance.MouseOverBackColor = Color.FromArgb(52, 152, 219);
+            btn_status.FlatStyle = FlatStyle.Flat;
+            btn_status.Font = new Font("Segoe UI", 11F);
+            btn_status.ForeColor = Color.White;
+            btn_status.Location = new Point(10, 392);
+            btn_status.Name = "btn_status";
+            btn_status.Size = new Size(240, 50);
+            btn_status.TabIndex = 5;
+            btn_status.Text = "📋  Pembayaran";
+            btn_status.UseVisualStyleBackColor = false;
+            btn_status.Click += btn_status_Click;
             // 
             // btn_laporan
             // 
@@ -83,40 +117,6 @@ namespace Rental_app
             btn_dataPelanggan.TextAlign = ContentAlignment.MiddleLeft;
             btn_dataPelanggan.UseVisualStyleBackColor = false;
             btn_dataPelanggan.Click += btn_dataPelanggan_Click;
-            // 
-            // btn_status
-            // 
-            btn_status.BackColor = Color.FromArgb(41, 128, 185);
-            btn_status.FlatAppearance.BorderSize = 0;
-            btn_status.FlatAppearance.MouseDownBackColor = Color.FromArgb(30, 100, 160);
-            btn_status.FlatAppearance.MouseOverBackColor = Color.FromArgb(52, 152, 219);
-            btn_status.FlatStyle = FlatStyle.Flat;
-            btn_status.Font = new Font("Segoe UI", 11F);
-            btn_status.ForeColor = Color.White;
-            btn_status.Location = new Point(10, 392);
-            btn_status.Name = "btn_status";
-            btn_status.Size = new Size(240, 50);
-            btn_status.TabIndex = 5;
-            btn_status.Text = "📋  Status Rental";
-            btn_status.UseVisualStyleBackColor = false;
-            btn_status.Click += btn_status_Click;
-            // 
-            // btn_transaksi
-            // 
-            btn_transaksi.BackColor = Color.FromArgb(41, 128, 185);
-            btn_transaksi.FlatAppearance.BorderSize = 0;
-            btn_transaksi.FlatAppearance.MouseDownBackColor = Color.FromArgb(30, 100, 160);
-            btn_transaksi.FlatAppearance.MouseOverBackColor = Color.FromArgb(52, 152, 219);
-            btn_transaksi.FlatStyle = FlatStyle.Flat;
-            btn_transaksi.Font = new Font("Segoe UI", 11F);
-            btn_transaksi.ForeColor = Color.White;
-            btn_transaksi.Location = new Point(10, 332);
-            btn_transaksi.Name = "btn_transaksi";
-            btn_transaksi.Size = new Size(240, 50);
-            btn_transaksi.TabIndex = 4;
-            btn_transaksi.Text = "💰  Transaksi";
-            btn_transaksi.UseVisualStyleBackColor = false;
-            btn_transaksi.Click += btn_transaksi_Click_1;
             // 
             // btn_daftarMobil
             // 

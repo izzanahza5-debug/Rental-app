@@ -6,23 +6,34 @@ using System.Collections.Generic;
     public class UserController
 {
     private string koneksi = "server=localhost;database=rental_db;uid=root;pwd=;";
-    public List<User> GetUser()
+    public List<TransaksiDashboard> GetUser()
     {
-        List<User> users = new List<User>();
+        List<TransaksiDashboard> users = new List<TransaksiDashboard>();
         using (var conn = new MySqlConnection(koneksi))
         {
             conn.Open();
-            string query = "SELECT * FROM users";
+            string query = "SELECT " + 
+    " m.id,"+
+    " m.nama_mobil," +
+    " p.nama," +
+    " t.tgl_sewa," +
+    " t.tgl_rencana_kembali "+
+" FROM tbl_transaksi t" +
+" JOIN daftar_mobil m ON t.id_mobil = m.id" +
+" JOIN pelanggan p ON t.id_pelanggan = p.id;";
             using (var cmd = new MySqlCommand(query, conn))
             {
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        users.Add(new User
+                        users.Add(new TransaksiDashboard
                         {
-                            Id = Convert.ToInt32(reader["Id"]),
-                            Nama = reader["Nama"].ToString(),
+                            IdTransaksi = Convert.ToInt32(reader["id"]),
+                            NamaMobil = reader["nama_mobil"].ToString(),
+                            NamaPelanggan = reader["nama"].ToString(),
+                            TglSewa = reader["tgl_sewa"].ToString(),
+                            TglRencanaKembali = reader["tgl_rencana_kembali"].ToString(),
                         });
                     }
 

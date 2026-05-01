@@ -79,6 +79,7 @@ namespace Rental_app
             pnlHeader.Padding = new Padding(29, 17, 29, 17);
             pnlHeader.Size = new Size(1714, 120);
             pnlHeader.TabIndex = 0;
+            pnlHeader.Paint += pnlHeader_Paint;
             // 
             // lblSubJudul
             // 
@@ -540,8 +541,9 @@ namespace Rental_app
             txtCari.Font = new Font("Segoe UI", 9F);
             txtCari.Location = new Point(14, 13);
             txtCari.Margin = new Padding(4, 5, 4, 5);
+            txtCari.Multiline = true;
             txtCari.Name = "txtCari";
-            txtCari.Size = new Size(371, 31);
+            txtCari.Size = new Size(371, 47);
             txtCari.TabIndex = 0;
             // 
             // UC__TransaksiPenyewaan

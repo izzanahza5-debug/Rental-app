@@ -26,6 +26,7 @@ namespace Rental_app
             // Style ListBox
             listPopuler.Font = new Font("Segoe UI", 10F);
             listPopuler.ItemHeight = 25;
+            gridTransaksi.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             // Add hover effects to stat cards
             AddCardHoverEffect(cardTotal);

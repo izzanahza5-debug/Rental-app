@@ -71,7 +71,7 @@ namespace Rental_app
                 cboPelanggan.DataSource = null;
                 cboPelanggan.DataSource = listPelanggan;
                 cboPelanggan.DisplayMember = "nama_pelanggan";
-                cboPelanggan.ValueMember = "Id";
+                cboPelanggan.ValueMember = "id";
                 cboPelanggan.SelectedIndex = 0;
             }
             catch (Exception ex)
@@ -115,7 +115,7 @@ namespace Rental_app
                 cboMobil.DataSource = null;           // reset dulu agar tidak dobel
                 cboMobil.DataSource = _listMobil;
                 cboMobil.DisplayMember = "nama_mobil";
-                cboMobil.ValueMember = "Id";
+                cboMobil.ValueMember = "id";
                 cboMobil.SelectedIndex = _listMobil.Count > 0 ? 0 : -1;
             }
             catch (Exception ex)
@@ -413,6 +413,11 @@ namespace Rental_app
         private void CariTransaksi() => LoadDataTransaksi(txtCari.Text.Trim());
 
         private void cboPelanggan_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlHeader_Paint(object sender, PaintEventArgs e)
         {
 
         }

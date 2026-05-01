@@ -16,6 +16,7 @@ namespace Rental_app
             base.OnLoad(e);
             // Show Dashboard page by default
             ShowPage(new UC_Dashboard());
+            
         }
 
         private void SetupButtonHoverEffects()
@@ -89,7 +90,7 @@ namespace Rental_app
         private void btn_status_Click(object sender, EventArgs e)
         {
             // Status Rental
-            ShowPage(new UC_Status());
+            ShowPage(new UC__Pembayaran());
         }
 
         private void btn_dataPelanggan_Click(object sender, EventArgs e)
@@ -101,7 +102,7 @@ namespace Rental_app
         private void btn_laporan_Click(object sender, EventArgs e)
         {
             // Laporan
-            ShowPage(new UC_Template());
+            ShowPage(new UC__PengembalianMobil());
         }
 
         private void button1_Click(object sender, EventArgs e)
