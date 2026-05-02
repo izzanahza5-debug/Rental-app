@@ -23,7 +23,7 @@ public class Pelanggan {
     public string nama_pelanggan { get; set; }
     public string alamat { get; set; }
     public string nomor_telepon { get; set; }
-    public string total_sewa { get; set; }
+    //public string total_sewa { get; set; }
 }
 
 public class ItemTransaksiAktif
@@ -51,6 +51,7 @@ public class TransaksiDashboard
     //public string PlatNomor { get; set; }
     public string TglSewa { get; set; }
     public string TglRencanaKembali { get; set; }
+    public string Status { get; set; }
     //public decimal TotalBiaya { get; set; }
     //public decimal HargaPerHari { get; set; }
 

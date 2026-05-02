@@ -150,7 +150,7 @@ namespace Rental_app
                         JOIN pelanggan    p ON t.id_pelanggan = p.id
                         JOIN daftar_mobil m ON t.id_mobil     = m.id
                         WHERE p.nama LIKE @kw OR m.nama_mobil LIKE @kw
-                        ORDER BY t.created_at DESC";
+                        ORDER BY t.created_at ASC";
 
                     using (var cmd = new MySqlCommand(sql, conn))
                     {

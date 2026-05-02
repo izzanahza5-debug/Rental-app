@@ -15,6 +15,9 @@ namespace Rental_app
 
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             lblDashboardTitle = new Label();
             lblDashboardSubtitle = new Label();
             flowLayoutStats = new FlowLayoutPanel();
@@ -42,7 +45,8 @@ namespace Rental_app
             listPopuler = new ListBox();
             panelTransaksi = new Panel();
             lblTransaksiTitle = new Label();
-            gridTransaksi = new DataGridView();
+            gridKategori = new DataGridView();
+            dataGridView1 = new DataGridView();
             flowLayoutStats.SuspendLayout();
             cardTotal.SuspendLayout();
             cardTersedia.SuspendLayout();
@@ -52,7 +56,8 @@ namespace Rental_app
             ((System.ComponentModel.ISupportInitialize)chartMobil).BeginInit();
             panelPopuler.SuspendLayout();
             panelTransaksi.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)gridTransaksi).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridKategori).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // lblDashboardTitle
@@ -108,9 +113,8 @@ namespace Rental_app
             label3.ForeColor = Color.FromArgb(33, 33, 33);
             label3.Location = new Point(70, 67);
             label3.Name = "label3";
-            label3.Size = new Size(45, 34);
+            label3.Size = new Size(0, 34);
             label3.TabIndex = 8;
-            label3.Text = "46";
             label3.Click += label3_Click;
             // 
             // label2
@@ -150,6 +154,7 @@ namespace Rental_app
             cardTersedia.Name = "cardTersedia";
             cardTersedia.Size = new Size(330, 130);
             cardTersedia.TabIndex = 1;
+            cardTersedia.Paint += cardTersedia_Paint;
             // 
             // label4
             // 
@@ -158,9 +163,8 @@ namespace Rental_app
             label4.ForeColor = Color.FromArgb(33, 33, 33);
             label4.Location = new Point(76, 67);
             label4.Name = "label4";
-            label4.Size = new Size(45, 34);
+            label4.Size = new Size(0, 34);
             label4.TabIndex = 11;
-            label4.Text = "46";
             // 
             // label5
             // 
@@ -205,9 +209,8 @@ namespace Rental_app
             label7.ForeColor = Color.FromArgb(33, 33, 33);
             label7.Location = new Point(80, 67);
             label7.Name = "label7";
-            label7.Size = new Size(45, 34);
+            label7.Size = new Size(0, 34);
             label7.TabIndex = 11;
-            label7.Text = "46";
             // 
             // label8
             // 
@@ -283,6 +286,7 @@ namespace Rental_app
             // 
             panelChart.BackColor = Color.White;
             panelChart.BorderStyle = BorderStyle.FixedSingle;
+            panelChart.Controls.Add(dataGridView1);
             panelChart.Controls.Add(lblChartTitle);
             panelChart.Controls.Add(chartMobil);
             panelChart.Location = new Point(20, 280);
@@ -306,7 +310,7 @@ namespace Rental_app
             chartMobil.BackColor = Color.White;
             chartMobil.Location = new Point(10, 45);
             chartMobil.Name = "chartMobil";
-            chartMobil.Size = new Size(970, 260);
+            chartMobil.Size = new Size(0, 0);
             chartMobil.TabIndex = 1;
             chartMobil.TabStop = false;
             // 
@@ -347,7 +351,7 @@ namespace Rental_app
             panelTransaksi.BackColor = Color.White;
             panelTransaksi.BorderStyle = BorderStyle.FixedSingle;
             panelTransaksi.Controls.Add(lblTransaksiTitle);
-            panelTransaksi.Controls.Add(gridTransaksi);
+            panelTransaksi.Controls.Add(gridKategori);
             panelTransaksi.Location = new Point(20, 620);
             panelTransaksi.Name = "panelTransaksi";
             panelTransaksi.Size = new Size(1400, 280);
@@ -364,16 +368,101 @@ namespace Rental_app
             lblTransaksiTitle.TabIndex = 0;
             lblTransaksiTitle.Text = "Transaksi Terbaru";
             // 
-            // gridTransaksi
+            // gridKategori
             // 
-            gridTransaksi.BackgroundColor = Color.White;
-            gridTransaksi.BorderStyle = BorderStyle.None;
-            gridTransaksi.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridTransaksi.Location = new Point(10, 45);
-            gridTransaksi.Name = "gridTransaksi";
-            gridTransaksi.RowHeadersWidth = 62;
-            gridTransaksi.Size = new Size(1380, 220);
-            gridTransaksi.TabIndex = 1;
+            gridKategori.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(248, 249, 250);
+            gridKategori.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            gridKategori.BackgroundColor = Color.White;
+            gridKategori.BorderStyle = BorderStyle.None;
+            gridKategori.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            gridKategori.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.Padding = new Padding(10, 5, 0, 5);
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            gridKategori.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            gridKategori.ColumnHeadersHeight = 45;
+            gridKategori.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(71, 71, 71);
+            dataGridViewCellStyle3.Padding = new Padding(10, 0, 0, 0);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(232, 244, 255);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            gridKategori.DefaultCellStyle = dataGridViewCellStyle3;
+            gridKategori.EnableHeadersVisualStyles = false;
+            gridKategori.GridColor = Color.FromArgb(239, 239, 239);
+            gridKategori.Location = new Point(10, 55);
+            gridKategori.Name = "gridKategori";
+            gridKategori.ReadOnly = true;
+            gridKategori.RowHeadersVisible = false;
+            gridKategori.RowHeadersWidth = 62;
+            gridKategori.RowTemplate.Height = 40;
+            gridKategori.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            gridKategori.Size = new Size(1380, 210);
+            gridKategori.TabIndex = 1;
+            // 
+            // dataGridView1
+            // 
+            // 1. Pengaturan Dasar & Layout dataGridView1
+            dataGridView1.Location = new Point(-1, 45);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(1000, 274);
+            dataGridView1.TabIndex = 2;
+
+            dataGridView1.BackgroundColor = Color.White;
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridView1.GridColor = Color.FromArgb(239, 239, 239); // Garis abu-abu tipis
+            dataGridView1.ReadOnly = true;
+            dataGridView1.RowHeadersVisible = false; // Menyembunyikan panah di kiri baris
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.AllowUserToResizeRows = false;
+
+            // PENTING: Wajib diset false agar warna header buatan kita bisa muncul
+            dataGridView1.EnableHeadersVisualStyles = false;
+
+            // 2. Styling Baris Selang-Seling (Alternating Rows)
+            DataGridViewCellStyle styleAlternating = new DataGridViewCellStyle();
+            styleAlternating.BackColor = Color.FromArgb(248, 249, 250); // Abu-abu sangat terang
+            dataGridView1.AlternatingRowsDefaultCellStyle = styleAlternating;
+
+            // 3. Styling Header Kolom (Warna Biru Profesional)
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            DataGridViewCellStyle styleHeader = new DataGridViewCellStyle();
+            styleHeader.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            styleHeader.BackColor = Color.FromArgb(33, 150, 243); // Biru Utama
+            styleHeader.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            styleHeader.ForeColor = Color.White;
+            styleHeader.Padding = new Padding(10, 5, 0, 5); // Memberi ruang teks agar tidak menempel garis
+            styleHeader.SelectionBackColor = SystemColors.Highlight;
+            styleHeader.SelectionForeColor = SystemColors.HighlightText;
+            styleHeader.WrapMode = DataGridViewTriState.True;
+
+            dataGridView1.ColumnHeadersDefaultCellStyle = styleHeader;
+            dataGridView1.ColumnHeadersHeight = 45;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
+            // 4. Styling Baris Konten (Font Segoe UI, Efek Hover Biru Muda)
+            DataGridViewCellStyle styleCell = new DataGridViewCellStyle();
+            styleCell.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            styleCell.BackColor = Color.White;
+            styleCell.Font = new Font("Segoe UI", 9F);
+            styleCell.ForeColor = Color.FromArgb(71, 71, 71); // Warna teks abu-abu gelap agar tidak terlalu kontras
+            styleCell.Padding = new Padding(10, 0, 0, 0);
+            styleCell.SelectionBackColor = Color.FromArgb(232, 244, 255); // Background biru muda saat diklik
+            styleCell.SelectionForeColor = Color.FromArgb(33, 150, 243);  // Text biru saat diklik
+            styleCell.WrapMode = DataGridViewTriState.False;
+
+            dataGridView1.DefaultCellStyle = styleCell;
+            dataGridView1.RowTemplate.Height = 40; // Baris lebih tinggi agar terlihat lapang
             // 
             // UC_Dashboard
             // 
@@ -405,7 +494,8 @@ namespace Rental_app
             panelPopuler.PerformLayout();
             panelTransaksi.ResumeLayout(false);
             panelTransaksi.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)gridTransaksi).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridKategori).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -425,7 +515,7 @@ namespace Rental_app
         private ListBox listPopuler;
         private Panel panelTransaksi;
         private Label lblTransaksiTitle;
-        private DataGridView gridTransaksi;
+        private DataGridView gridKategori;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -438,5 +528,6 @@ namespace Rental_app
         private Label label10;
         private Label label11;
         private Label label12;
+        private DataGridView dataGridView1;
     }
 }

@@ -64,7 +64,7 @@ namespace Rental_app
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            
+
 
             if (gridKategori.SelectedRows.Count > 0)
             {
@@ -90,7 +90,7 @@ namespace Rental_app
                 if (berhasil)
                 {
                     gridKategori.DataSource = KategoriController.GetKategori();
-       
+
 
                 }
                 else
@@ -141,7 +141,7 @@ namespace Rental_app
 
         private void gridKategori_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            TampilDataMobil();
+            //TampilDataMobil();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -177,6 +177,11 @@ namespace Rental_app
         }
 
         private void panel_edit_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void gridKategori_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
         }

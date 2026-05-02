@@ -64,7 +64,7 @@ namespace Rental_app
                         JOIN daftar_mobil      m ON t.id_mobil      = m.id
                         WHERE t.status = 'Aktif'
                           AND (p.nama LIKE @kw OR m.nama_mobil LIKE @kw)
-                        ORDER BY t.created_at DESC";
+                        ORDER BY t.created_at ASC";
 
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@kw", "%" + keyword + "%");
@@ -338,7 +338,7 @@ namespace Rental_app
                         JOIN pelanggan p ON t.id_pelanggan = p.id
                         JOIN daftar_mobil     m ON t.id_mobil     = m.id
                         WHERE p.nama LIKE @kw OR m.nama_mobil LIKE @kw
-                        ORDER BY b.tgl_bayar DESC";
+                        ORDER BY b.tgl_bayar ASC";
 
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@kw", "%" + keyword + "%");

@@ -13,20 +13,21 @@ namespace Rental_app
         private void StyleDashboard()
         {
             //// Style DataGridView
-            //gridTransaksi.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
-            //gridTransaksi.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            //gridTransaksi.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(240, 242, 245);
-            //gridTransaksi.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(100, 100, 100);
-            //gridTransaksi.ColumnHeadersHeight = 30;
-            //gridTransaksi.RowTemplate.Height = 25;
-            //gridTransaksi.AllowUserToAddRows = false;
-            //gridTransaksi.AllowUserToDeleteRows = false;
-            //gridTransaksi.ReadOnly = true;
+            //gridKategori.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
+            //gridKategori.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            //gridKategori.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(240, 242, 245);
+            //gridKategori.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(100, 100, 100);
+            //gridKategori.ColumnHeadersHeight = 30;
+            //gridKategori.RowTemplate.Height = 25;
+            //gridKategori.AllowUserToAddRows = false;
+            //gridKategori.AllowUserToDeleteRows = false;
+            //gridKategori.ReadOnly = true;
 
             // Style ListBox
             listPopuler.Font = new Font("Segoe UI", 10F);
             listPopuler.ItemHeight = 25;
-            gridTransaksi.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            gridKategori.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             // Add hover effects to stat cards
             AddCardHoverEffect(cardTotal);
@@ -51,12 +52,19 @@ namespace Rental_app
 
         private void UC_Dashboard_Load(object sender, EventArgs e)
         {
-            gridTransaksi.DataSource = userController.GetUser();
+            gridKategori.DataSource = userController.GetUser();
+            dataGridView1.DataSource = dashboardController.StatusMobil();
+            dataGridView1.Columns["id"].Visible = false;
+            dataGridView1.Columns["kategori"].Visible = false;
+            dataGridView1.Columns["harga"].Visible = false;
             label3.Text = dashboardController.totalMobil().ToString();
+            label7.Text = dashboardController.totalPelanggan().ToString();
+            label4.Text = dashboardController.totalAktif().ToString();
+             //var populerList = dashboardController.GetPopuler();
         }
 
 
-        private void gridTransaksi_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void gridKategori_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             // TODO: implementasi sesuai kebutuhan
         }
@@ -68,7 +76,7 @@ namespace Rental_app
 
         private void label2_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -77,6 +85,11 @@ namespace Rental_app
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cardTersedia_Paint(object sender, PaintEventArgs e)
         {
 
         }

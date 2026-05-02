@@ -8,39 +8,41 @@ using System.Collections.Generic;
     private string koneksi = "server=localhost;database=rental_db;uid=root;pwd=;";
     public List<TransaksiDashboard> GetUser()
     {
-        List<TransaksiDashboard> users = new List<TransaksiDashboard>();
+        List<TransaksiDashboard> transaksi = new List<TransaksiDashboard>();
         using (var conn = new MySqlConnection(koneksi))
         {
             conn.Open();
             string query = "SELECT " + 
-    " m.id,"+
+    " t.id_transaksi,"+
     " m.nama_mobil," +
     " p.nama," +
     " t.tgl_sewa," +
-    " t.tgl_rencana_kembali "+
+    " t.tgl_rencana_kembali, "+
+    " t.status "+
 " FROM tbl_transaksi t" +
 " JOIN daftar_mobil m ON t.id_mobil = m.id" +
-" JOIN pelanggan p ON t.id_pelanggan = p.id;";
+" JOIN pelanggan p ON t.id_pelanggan = p.id ORDER BY id_transaksi DESC LIMIT 5;";
             using (var cmd = new MySqlCommand(query, conn))
             {
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        users.Add(new TransaksiDashboard
+                        transaksi.Add(new TransaksiDashboard
                         {
-                            IdTransaksi = Convert.ToInt32(reader["id"]),
+                            IdTransaksi = Convert.ToInt32(reader["id_transaksi"]),
                             NamaMobil = reader["nama_mobil"].ToString(),
                             NamaPelanggan = reader["nama"].ToString(),
                             TglSewa = reader["tgl_sewa"].ToString(),
                             TglRencanaKembali = reader["tgl_rencana_kembali"].ToString(),
+                            Status = reader["status"].ToString(),
                         });
                     }
 
                 }
             }
         }
-        return users;
+        return transaksi;
     }
 
 }
@@ -162,162 +164,164 @@ using System.Collections.Generic;
         }
     }
 }
+
     public class MobilController
     {
         private string koneksi = "server=localhost;database=rental_db;uid=root;pwd=;";
 
-    public List<Mobil> GetMobil()
-    {
-        List<Mobil> mobils = new List<Mobil>();
-        using (var conn = new MySqlConnection(koneksi))
+        public List<Mobil> GetMobil()
         {
-            conn.Open();
-            string query = @"SELECT 
-                            m.id,
-                            m.nama_mobil,
-                            m.nomor_plat,
-                            m.harga,
-                            k.nama_kategori,
-                            m.status
-                         FROM daftar_mobil m
-                         JOIN kategori k ON m.kategori = k.id";
-
-            using (var cmd = new MySqlCommand(query, conn))
+            List<Mobil> mobils = new List<Mobil>();
+            using (var conn = new MySqlConnection(koneksi))
             {
-                using (var reader = cmd.ExecuteReader())
+                conn.Open();
+                string query = @"SELECT 
+                                m.id,
+                                m.nama_mobil,
+                                m.nomor_plat,
+                                m.harga,
+                                k.nama_kategori,
+                                m.status
+                             FROM daftar_mobil m
+                             JOIN kategori k ON m.kategori = k.id";
+
+                using (var cmd = new MySqlCommand(query, conn))
                 {
-                    while (reader.Read())
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        mobils.Add(new Mobil
+                        while (reader.Read())
                         {
-                            id = reader.GetInt32("id"),
-                            nama_mobil = reader["nama_mobil"].ToString(),
-                            nomor_plat = reader["nomor_plat"].ToString(),
-                            harga = Convert.ToDecimal(reader["harga"]),
-                            kategori = reader["nama_kategori"].ToString(), // 🔥 ini yang berubah
-                            status = reader["status"].ToString(),
-                        });
+                            mobils.Add(new Mobil
+                            {
+                                id = reader.GetInt32("id"),
+                                nama_mobil = reader["nama_mobil"].ToString(),
+                                nomor_plat = reader["nomor_plat"].ToString(),
+                                harga = Convert.ToDecimal(reader["harga"]),
+                                kategori = reader["nama_kategori"].ToString(), // 🔥 ini yang berubah
+                                status = reader["status"].ToString(),
+                            });
+                        }
                     }
                 }
             }
+            return mobils;
         }
-        return mobils;
-    }
 
-    public bool CreateMobil(string nama_mobil, string nomor_plat, decimal harga, string kategori, string status)
-        {
-            try
+        public bool CreateMobil(string nama_mobil, string nomor_plat, decimal harga, string kategori, string status)
             {
-                using (var conn = new MySqlConnection(koneksi))
+                try
                 {
-                    conn.Open();
-                    string query = "INSERT INTO daftar_mobil (nama_mobil, nomor_plat, harga, kategori, status) " +
-                                   "VALUES (@nama_mobil, @nomor_plat, @harga, @kategori, @status)";
-                    using (var cmd = new MySqlCommand(query, conn))
+                    using (var conn = new MySqlConnection(koneksi))
                     {
-                        cmd.Parameters.AddWithValue("@nama_mobil", nama_mobil);
-                        cmd.Parameters.AddWithValue("@nomor_plat", nomor_plat);
-                        cmd.Parameters.AddWithValue("@harga", harga);
-                        cmd.Parameters.AddWithValue("@kategori", kategori);
-                        cmd.Parameters.AddWithValue("@status", status);
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        return rowsAffected > 0;
+                        conn.Open();
+                        string query = "INSERT INTO daftar_mobil (nama_mobil, nomor_plat, harga, kategori, status) " +
+                                       "VALUES (@nama_mobil, @nomor_plat, @harga, @kategori, @status)";
+                        using (var cmd = new MySqlCommand(query, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@nama_mobil", nama_mobil);
+                            cmd.Parameters.AddWithValue("@nomor_plat", nomor_plat);
+                            cmd.Parameters.AddWithValue("@harga", harga);
+                            cmd.Parameters.AddWithValue("@kategori", kategori);
+                            cmd.Parameters.AddWithValue("@status", status);
+                            int rowsAffected = cmd.ExecuteNonQuery();
+                            return rowsAffected > 0;
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                    return false;
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-                return false;
-            }
-        }
         public bool UpdateMobil(int id, string nama_mobil, string nomor_plat, decimal harga, string kategori, string status)
-        {
-            try
             {
-                using (var conn = new MySqlConnection(koneksi))
+                try
                 {
-                    conn.Open();
-
-                    string query = "UPDATE daftar_mobil SET " +
-                                   "nama_mobil = @nama_mobil, " +
-                                   "nomor_plat = @nomor_plat, " +
-                                   "harga = @harga, " +
-                                   "kategori = @kategori, " +
-                                   "status = @status " +
-                                   "WHERE id = @id";
-
-                    using (var cmd = new MySqlCommand(query, conn))
+                    using (var conn = new MySqlConnection(koneksi))
                     {
-                        cmd.Parameters.AddWithValue("@id", id);
-                        cmd.Parameters.AddWithValue("@nama_mobil", nama_mobil);
-                        cmd.Parameters.AddWithValue("@nomor_plat", nomor_plat);
-                        cmd.Parameters.AddWithValue("@harga", harga);
-                        cmd.Parameters.AddWithValue("@kategori", kategori);
-                        cmd.Parameters.AddWithValue("@status", status);
+                        conn.Open();
 
-                        int rowsAffected = cmd.ExecuteNonQuery();
+                        string query = "UPDATE daftar_mobil SET " +
+                                       "nama_mobil = @nama_mobil, " +
+                                       "nomor_plat = @nomor_plat, " +
+                                       "harga = @harga, " +
+                                       "kategori = @kategori, " +
+                                       "status = @status " +
+                                       "WHERE id = @id";
 
-                        if (rowsAffected > 0)
+                        using (var cmd = new MySqlCommand(query, conn))
                         {
-                            MessageBox.Show("Data mobil berhasil diperbarui!", "Sukses",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            return true;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Data tidak ditemukan!", "Gagal",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return false;
+                            cmd.Parameters.AddWithValue("@id", id);
+                            cmd.Parameters.AddWithValue("@nama_mobil", nama_mobil);
+                            cmd.Parameters.AddWithValue("@nomor_plat", nomor_plat);
+                            cmd.Parameters.AddWithValue("@harga", harga);
+                            cmd.Parameters.AddWithValue("@kategori", kategori);
+                            cmd.Parameters.AddWithValue("@status", status);
+
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("Data mobil berhasil diperbarui!", "Sukses",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return true;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Data tidak ditemukan!", "Gagal",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return false;
+                            }
                         }
                     }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Terjadi error: " + ex.Message, "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Terjadi error: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-        }
         public bool deleteMobil(int id)
-        {
-            try
             {
-
-                using (var conn = new MySqlConnection(koneksi))
+                try
                 {
-                    conn.Open();
-                    string query = "DELETE FROM daftar_mobil WHERE id=@id ";
-                    using (var cmd = new MySqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@id", id);
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Data mobil berhasil dihapus!", "Sukses",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            return true;
 
-                        }
-                        else
+                    using (var conn = new MySqlConnection(koneksi))
+                    {
+                        conn.Open();
+                        string query = "DELETE FROM daftar_mobil WHERE id=@id ";
+                        using (var cmd = new MySqlCommand(query, conn))
                         {
-                            MessageBox.Show("Data tidak ditemukan!", "Gagal",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return false;
+                            cmd.Parameters.AddWithValue("@id", id);
+                            int rowsAffected = cmd.ExecuteNonQuery();
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("Data mobil berhasil dihapus!", "Sukses",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return true;
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("Data tidak ditemukan!", "Gagal",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return false;
+                            }
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message, "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
 
-        }
+            }
     }
+
     public class PelangganController
     {
         string koneksi = "server=localhost;database=rental_db;uid=root;pwd=;";
@@ -340,7 +344,7 @@ using System.Collections.Generic;
                                 nama_pelanggan = reader["nama"].ToString(),
                                 alamat = reader["alamat"].ToString(),
                                 nomor_telepon = reader["nomor_wa"].ToString(),
-                                total_sewa = reader["total_sewa"].ToString(),
+                                //total_sewa = reader["total_sewa"].ToString(),
                             });
                         }
                     }
@@ -463,18 +467,76 @@ using System.Collections.Generic;
 
     public class DashboardController
 {
-    string koneksi = "server=localhost;database=rental_db;uid=root;pwd=;";
-    public int totalMobil()
+        string koneksi = "server=localhost;database=rental_db;uid=root;pwd=;";
+        public int totalMobil()
+        {
+            using (var conn = new MySqlConnection(koneksi))
+            {
+                conn.Open();
+                string query = "SELECT COUNT(*) FROM daftar_mobil;";
+                using(var cmd = new MySqlCommand(query, conn))
+                {
+                    int total = Convert.ToInt32(cmd.ExecuteScalar());
+                    return total;
+                }
+            }
+        }
+
+        public int totalPelanggan()
+        {
+            using(var conn = new MySqlConnection(koneksi))
+            {
+                conn.Open();
+                string query = "SELECT COUNT(*) FROM pelanggan;";
+                using(var cmd = new MySqlCommand(query, conn))
+                {
+                    int total = Convert.ToInt32(cmd.ExecuteScalar());
+                    return total;
+                }
+            }
+        }
+        public int totalAktif()
+        {
+            using (var conn = new MySqlConnection(koneksi))
+            {
+                conn.Open();
+                string query = "SELECT COUNT(*) FROM tbl_transaksi WHERE status = 'aktif';";
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    int total = Convert.ToInt32(cmd.ExecuteScalar()); return total;
+                }
+            }
+        }
+    public List<Mobil> StatusMobil()
     {
+        List<Mobil> mobils = new List<Mobil>();
         using (var conn = new MySqlConnection(koneksi))
         {
             conn.Open();
-            string query = "SELECT COUNT(*) FROM daftar_mobil;";
+            string query = "SELECT * FROM daftar_mobil;";
             using(var cmd = new MySqlCommand(query, conn))
             {
-                int total = Convert.ToInt32(cmd.ExecuteScalar());
-                return total;
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        mobils.Add(new Mobil
+                        {
+                            id = reader.GetInt32("id"),
+                            nama_mobil = reader["nama_mobil"].ToString(),
+                            nomor_plat = reader["nomor_plat"].ToString(),
+                            harga = Convert.ToDecimal(reader["harga"]),
+                            kategori = reader["kategori"].ToString(),
+                            status = reader["status"].ToString(),
+                        });
+                        //mobil.nama_mobil = reader["nama_mobil"].ToString();
+                        //mobil.nomor_plat = reader["nomor_plat"].ToString();
+                        //mobil.status = reader["status"].ToString();
+                        //mobils.Add(mobil);
+                    }
+                }
             }
+            return mobils;
         }
     }
 }
