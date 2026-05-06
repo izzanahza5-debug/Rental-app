@@ -19,9 +19,9 @@ namespace Rental_app
 
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             pnlHeader = new Panel();
             lblSubJudul = new Label();
             lblJudul = new Label();
@@ -56,6 +56,7 @@ namespace Rental_app
             btnRefresh = new Button();
             btnCari = new Button();
             txtCari = new TextBox();
+            button1 = new Button();
             pnlHeader.SuspendLayout();
             pnlKiri.SuspendLayout();
             pnlTombol.SuspendLayout();
@@ -135,6 +136,7 @@ namespace Rental_app
             // pnlTombol
             // 
             pnlTombol.BackColor = Color.FromArgb(245, 246, 250);
+            pnlTombol.Controls.Add(button1);
             pnlTombol.Controls.Add(btnReset);
             pnlTombol.Controls.Add(btnBatal);
             pnlTombol.Controls.Add(btnSimpan);
@@ -153,10 +155,10 @@ namespace Rental_app
             btnReset.FlatStyle = FlatStyle.Flat;
             btnReset.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnReset.ForeColor = Color.White;
-            btnReset.Location = new Point(309, 17);
+            btnReset.Location = new Point(248, 17);
             btnReset.Margin = new Padding(4, 5, 4, 5);
             btnReset.Name = "btnReset";
-            btnReset.Size = new Size(114, 60);
+            btnReset.Size = new Size(82, 60);
             btnReset.TabIndex = 2;
             btnReset.Text = "Reset";
             btnReset.UseVisualStyleBackColor = false;
@@ -169,13 +171,14 @@ namespace Rental_app
             btnBatal.FlatStyle = FlatStyle.Flat;
             btnBatal.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnBatal.ForeColor = Color.White;
-            btnBatal.Location = new Point(154, 17);
+            btnBatal.Location = new Point(135, 17);
             btnBatal.Margin = new Padding(4, 5, 4, 5);
             btnBatal.Name = "btnBatal";
-            btnBatal.Size = new Size(143, 60);
+            btnBatal.Size = new Size(105, 60);
             btnBatal.TabIndex = 1;
             btnBatal.Text = "Batalkan";
             btnBatal.UseVisualStyleBackColor = false;
+            btnBatal.Click += btnBatal_Click_1;
             // 
             // btnSimpan
             // 
@@ -185,10 +188,10 @@ namespace Rental_app
             btnSimpan.FlatStyle = FlatStyle.Flat;
             btnSimpan.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnSimpan.ForeColor = Color.White;
-            btnSimpan.Location = new Point(0, 17);
+            btnSimpan.Location = new Point(22, 17);
             btnSimpan.Margin = new Padding(4, 5, 4, 5);
             btnSimpan.Name = "btnSimpan";
-            btnSimpan.Size = new Size(143, 60);
+            btnSimpan.Size = new Size(106, 60);
             btnSimpan.TabIndex = 0;
             btnSimpan.Text = "Simpan";
             btnSimpan.UseVisualStyleBackColor = false;
@@ -450,29 +453,29 @@ namespace Rental_app
             // 
             dgvTransaksi.AllowUserToAddRows = false;
             dgvTransaksi.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(249, 251, 255);
-            dgvTransaksi.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle10.BackColor = Color.FromArgb(249, 251, 255);
+            dgvTransaksi.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
             dgvTransaksi.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvTransaksi.BackgroundColor = Color.White;
             dgvTransaksi.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(30, 136, 229);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.Padding = new Padding(4, 6, 4, 6);
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvTransaksi.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = Color.FromArgb(30, 136, 229);
+            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle11.ForeColor = Color.White;
+            dataGridViewCellStyle11.Padding = new Padding(4, 6, 4, 6);
+            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            dgvTransaksi.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             dgvTransaksi.ColumnHeadersHeight = 38;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Window;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(30, 136, 229);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(210, 232, 255);
-            dataGridViewCellStyle3.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgvTransaksi.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = SystemColors.Window;
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle12.ForeColor = Color.FromArgb(30, 136, 229);
+            dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(210, 232, 255);
+            dataGridViewCellStyle12.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
+            dgvTransaksi.DefaultCellStyle = dataGridViewCellStyle12;
             dgvTransaksi.Dock = DockStyle.Fill;
             dgvTransaksi.EnableHeadersVisualStyles = false;
             dgvTransaksi.Font = new Font("Segoe UI", 9F);
@@ -546,6 +549,23 @@ namespace Rental_app
             txtCari.Size = new Size(371, 47);
             txtCari.TabIndex = 0;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.FromArgb(40, 167, 69);
+            button1.Cursor = Cursors.Hand;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(338, 17);
+            button1.Margin = new Padding(4, 5, 4, 5);
+            button1.Name = "button1";
+            button1.Size = new Size(164, 60);
+            button1.TabIndex = 3;
+            button1.Text = "Kembalikan Mobil";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // UC__TransaksiPenyewaan
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -611,5 +631,6 @@ namespace Rental_app
         private System.Windows.Forms.Button btnCari;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.DataGridView dgvTransaksi;
+        private Button button1;
     }
 }

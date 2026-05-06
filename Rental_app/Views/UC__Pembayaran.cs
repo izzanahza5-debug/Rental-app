@@ -273,19 +273,19 @@ namespace Rental_app
                             }
 
                             // Jika Lunas → update status transaksi jadi Selesai
-                            if (status == "Lunas")
-                            {
-                                var cmdTrx = new MySqlCommand("UPDATE tbl_transaksi SET status='Selesai' WHERE id_transaksi=@id", conn, tx);
-                                cmdTrx.Parameters.AddWithValue("@id", _idTransaksi);
-                                cmdTrx.ExecuteNonQuery();
+                            //if (status == "Lunas")
+                            //{
+                            //    var cmdTrx = new MySqlCommand("UPDATE tbl_transaksi SET status='Selesai' WHERE id_transaksi=@id", conn, tx);
+                            //    cmdTrx.Parameters.AddWithValue("@id", _idTransaksi);
+                            //    cmdTrx.ExecuteNonQuery();
 
-                                // Update status mobil → Tersedia
-                                var cmdMobil = new MySqlCommand(@"
-                                    UPDATE daftar_mobil SET status='Tersedia' 
-                                    WHERE id=(SELECT id_mobil FROM tbl_transaksi WHERE id_transaksi=@id)", conn, tx);
-                                cmdMobil.Parameters.AddWithValue("@id", _idTransaksi);
-                                cmdMobil.ExecuteNonQuery();
-                            }
+                            //    // Update status mobil → Tersedia
+                            //    var cmdMobil = new MySqlCommand(@"
+                            //        UPDATE daftar_mobil SET status='Tersedia' 
+                            //        WHERE id=(SELECT id_mobil FROM tbl_transaksi WHERE id_transaksi=@id)", conn, tx);
+                            //    cmdMobil.Parameters.AddWithValue("@id", _idTransaksi);
+                            //    cmdMobil.ExecuteNonQuery();
+                            //}
 
                             // Ambil id_pembayaran untuk cetak
                             var cmdGetId = new MySqlCommand("SELECT id_pembayaran FROM tbl_pembayaran WHERE id_transaksi=@id", conn, tx);

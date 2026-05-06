@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             lbDaftarMobil = new Label();
             comboBox1 = new ComboBox();
             panel1 = new Panel();
@@ -162,7 +165,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(52, 225);
             label3.Name = "label3";
-            label3.Size = new Size(109, 25);
+            label3.Size = new Size(106, 25);
             label3.TabIndex = 21;
             label3.Text = "harga / Hari";
             label3.Click += label3_Click;
@@ -228,16 +231,44 @@
             // 
             // dataGridView1
             // 
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.BackgroundColor = SystemColors.HighlightText;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(248, 249, 250);
+            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView1.BackgroundColor = Color.White;
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.Padding = new Padding(10, 5, 0, 5);
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView1.ColumnHeadersHeight = 45;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(71, 71, 71);
+            dataGridViewCellStyle3.Padding = new Padding(10, 0, 0, 0);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(232, 244, 255);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.GridColor = Color.FromArgb(239, 239, 239);
             dataGridView1.Location = new Point(20, 168);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
+            dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 62;
+            dataGridView1.RowTemplate.Height = 40;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(911, 532);
-            dataGridView1.TabIndex = 15;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridView1.TabIndex = 2;
             // 
             // pnlToolbar
             // 
@@ -369,7 +400,7 @@
             label8.AutoSize = true;
             label8.Location = new Point(52, 225);
             label8.Name = "label8";
-            label8.Size = new Size(109, 25);
+            label8.Size = new Size(106, 25);
             label8.TabIndex = 21;
             label8.Text = "harga / Hari";
             // 

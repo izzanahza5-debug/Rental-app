@@ -150,15 +150,58 @@
             // 
             // dataGridView1
             // 
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.BackgroundColor = SystemColors.ButtonHighlight;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            // 1. Pengaturan Dasar & Layout dataGridView1
             dataGridView1.Location = new Point(20, 178);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.RowHeadersWidth = 62;
             dataGridView1.Size = new Size(960, 532);
             dataGridView1.TabIndex = 2;
+
+            dataGridView1.BackgroundColor = Color.White;
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridView1.GridColor = Color.FromArgb(239, 239, 239); // Garis abu-abu tipis
+            dataGridView1.ReadOnly = true;
+            dataGridView1.RowHeadersVisible = false; // Menyembunyikan panah di kiri baris
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.AllowUserToResizeRows = false;
+
+            // PENTING: Wajib diset false agar warna header buatan kita bisa muncul
+            dataGridView1.EnableHeadersVisualStyles = false;
+
+            // 2. Styling Baris Selang-Seling (Alternating Rows)
+            DataGridViewCellStyle styleAlternating = new DataGridViewCellStyle();
+            styleAlternating.BackColor = Color.FromArgb(248, 249, 250); // Abu-abu sangat terang
+            dataGridView1.AlternatingRowsDefaultCellStyle = styleAlternating;
+
+            // 3. Styling Header Kolom (Warna Biru Profesional)
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            DataGridViewCellStyle styleHeader = new DataGridViewCellStyle();
+            styleHeader.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            styleHeader.BackColor = Color.FromArgb(33, 150, 243); // Biru Utama
+            styleHeader.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            styleHeader.ForeColor = Color.White;
+            styleHeader.Padding = new Padding(10, 5, 0, 5); // Memberi ruang teks agar tidak menempel garis
+            styleHeader.SelectionBackColor = SystemColors.Highlight;
+            styleHeader.SelectionForeColor = SystemColors.HighlightText;
+            styleHeader.WrapMode = DataGridViewTriState.True;
+
+            dataGridView1.ColumnHeadersDefaultCellStyle = styleHeader;
+            dataGridView1.ColumnHeadersHeight = 45;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
+            // 4. Styling Baris Konten (Font Segoe UI, Efek Hover Biru Muda)
+            DataGridViewCellStyle styleCell = new DataGridViewCellStyle();
+            styleCell.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            styleCell.BackColor = Color.White;
+            styleCell.Font = new Font("Segoe UI", 9F);
+            styleCell.ForeColor = Color.FromArgb(71, 71, 71); // Warna teks abu-abu gelap agar tidak terlalu kontras
+            styleCell.Padding = new Padding(10, 0, 0, 0);
+            styleCell.SelectionBackColor = Color.FromArgb(232, 244, 255); // Background biru muda saat diklik
+            styleCell.SelectionForeColor = Color.FromArgb(33, 150, 243);  // Text biru saat diklik
+            styleCell.WrapMode = DataGridViewTriState.False;
+
+            dataGridView1.DefaultCellStyle = styleCell;
+            dataGridView1.RowTemplate.Height = 40; // Baris lebih tinggi agar terlihat lapang
             // 
             // panel2
             // 

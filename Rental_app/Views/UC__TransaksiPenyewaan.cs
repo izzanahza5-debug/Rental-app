@@ -199,6 +199,50 @@ namespace Rental_app
             }
         }
 
+        //logika status
+        private void logikaStatus()
+        {
+            if (dgvTransaksi.CurrentRow == null)
+            {
+                MessageBox.Show("Pilih data terlebih dahulu!");
+                return;
+            }
+            int id = Convert.ToInt32(dgvTransaksi.Rows[0].Cells["IdTransaksi"].Value);
+
+            string status = dgvTransaksi.CurrentRow.Cells["status"].Value.ToString();
+
+            if (status == "Selesai")
+            {
+                MessageBox.Show("Transaksi ini sudah selesai!");
+                return;
+            }
+            using (var conn = DBHelper.GetConnection())
+            {
+                conn.Open();
+
+                // Update transaksi
+                var cmd = new MySqlCommand(@"
+        UPDATE tbl_transaksi 
+        SET status='Selesai', tgl_kembali_real=NOW()
+        WHERE id_transaksi=@id", conn);
+
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+
+                // Update mobil jadi tersedia
+                var cmdMobil = new MySqlCommand(@"
+        UPDATE daftar_mobil 
+        SET status='Tersedia' 
+        WHERE id = (SELECT id_mobil FROM tbl_transaksi WHERE id_transaksi=@id)", conn);
+
+                cmdMobil.Parameters.AddWithValue("@id", id);
+                cmdMobil.ExecuteNonQuery();
+
+                MessageBox.Show("Mobil berhasil dikembalikan!");
+                LoadDataTransaksi();
+            }
+        }
+
         // ── Atur nama header dan visibilitas kolom DGV ────────────
         private void AturKolomDGV()
         {
@@ -305,7 +349,7 @@ namespace Rental_app
                                 cmd.Parameters.AddWithValue("@ts", dtpTglSewa.Value.Date);
                                 cmd.Parameters.AddWithValue("@tk", dtpTglKembali.Value.Date);
                                 cmd.Parameters.AddWithValue("@dur", durasi);
-                                cmd.Parameters.AddWithValue("@harga", mobil.harga);
+                                cmd.Parameters.Add("@harga", MySqlDbType.Decimal).Value = mobil.harga;
                                 cmd.Parameters.AddWithValue("@total", total);
                                 cmd.Parameters.AddWithValue("@cat", txtCatatan.Text.Trim());
                                 cmd.ExecuteNonQuery();
@@ -420,6 +464,57 @@ namespace Rental_app
         private void pnlHeader_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnBatal_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (dgvTransaksi.SelectedRows.Count <= 0)
+            {
+                MessageBox.Show("Pilih data terlebih dahulu!");
+                return;
+            }
+
+            int id = Convert.ToInt32(dgvTransaksi.SelectedRows[0].Cells["IdTransaksi"].Value);
+            string status = dgvTransaksi.SelectedRows[0].Cells["status"].Value.ToString();
+
+            if (status == "Selesai")
+            {
+                MessageBox.Show("Transaksi ini sudah selesai!");
+                return;
+            }
+
+            if (MessageBox.Show("Yakin mobil sudah dikembalikan?",
+                "Konfirmasi", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                return;
+
+            using (var conn = DBHelper.GetConnection())
+            {
+                conn.Open();
+
+                var cmd = new MySqlCommand(@"
+            UPDATE tbl_transaksi 
+            SET status='Selesai', tgl_kembali_real=NOW()
+            WHERE id_transaksi=@id", conn);
+
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+
+                var cmdMobil = new MySqlCommand(@"
+            UPDATE daftar_mobil 
+            SET status='Tersedia' 
+            WHERE id = (SELECT id_mobil FROM tbl_transaksi WHERE id_transaksi=@id)", conn);
+
+                cmdMobil.Parameters.AddWithValue("@id", id);
+                cmdMobil.ExecuteNonQuery();
+
+                MessageBox.Show("Mobil berhasil dikembalikan!");
+                LoadDataTransaksi();
+            }
         }
     }
 }
