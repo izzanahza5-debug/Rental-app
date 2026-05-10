@@ -344,7 +344,7 @@ using System.Collections.Generic;
                                 nama_pelanggan = reader["nama"].ToString(),
                                 alamat = reader["alamat"].ToString(),
                                 nomor_telepon = reader["nomor_wa"].ToString(),
-                                //total_sewa = reader["total_sewa"].ToString(),
+                                total_sewa = reader["total_sewa"].ToString(),
                             });
                         }
                     }
@@ -353,7 +353,7 @@ using System.Collections.Generic;
             return pelanggans;
         }
 
-        public bool createPelanggan(string nama, string alamat, int nomor_wa, int total_sewa)
+        public bool createPelanggan(string nama, string alamat, int nomor_wa)
         {
             try
             {
@@ -361,13 +361,13 @@ using System.Collections.Generic;
                 using (var conn = new MySqlConnection(koneksi))
                 {
                     conn.Open();
-                    string query = "INSERT INTO pelanggan (nama, alamat, nomor_wa, total_sewa) VALUES (@nama, @alamat, @nomor_wa, @total_sewa)";
+                    string query = "INSERT INTO pelanggan (nama, alamat, nomor_wa, total_sewa) VALUES (@nama, @alamat, @nomor_wa, 0)";
                     using (var cmd = new MySqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@nama", nama);
                         cmd.Parameters.AddWithValue("@alamat", alamat);
                         cmd.Parameters.AddWithValue("@nomor_wa", nomor_wa);
-                        cmd.Parameters.AddWithValue("@total_sewa", total_sewa);
+                        //cmd.Parameters.AddWithValue("@total_sewa", 0);
                         int rowsAffected = cmd.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
@@ -500,7 +500,7 @@ using System.Collections.Generic;
             using (var conn = new MySqlConnection(koneksi))
             {
                 conn.Open();
-                string query = "SELECT COUNT(*) FROM tbl_transaksi WHERE status = 'aktif';";
+                string query = "SELECT COUNT(*) FROM tbl_transaksi WHERE status='aktif';";
                 using (var cmd = new MySqlCommand(query, conn))
                 {
                     int total = Convert.ToInt32(cmd.ExecuteScalar()); return total;
@@ -538,5 +538,45 @@ using System.Collections.Generic;
             }
             return mobils;
         }
+    }
+
+    public decimal pendapatan()
+    {
+        using (var conn = new MySqlConnection(koneksi))
+        {
+            conn.Open();
+            string query = "SELECT SUM(total_biaya) FROM tbl_transaksi;";
+            using (var cmd = new MySqlCommand(query, conn))
+            {
+                decimal pendapatan = Convert.ToDecimal(cmd.ExecuteScalar()); return pendapatan;
+            }
+        }
+    }
+    public List<string> DaftarMobilTerlaris()
+    {
+        var list = new List<string>();
+
+        using (var conn = new MySqlConnection(koneksi))
+        {
+            conn.Open();
+            string query = @"
+            SELECT m.nama_mobil, COUNT(t.id_transaksi) AS jumlah_sewa
+            FROM daftar_mobil m
+            INNER JOIN tbl_transaksi t ON m.id = t.id_mobil
+            GROUP BY m.id, m.nama_mobil
+            ORDER BY jumlah_sewa DESC;";
+
+            using (var cmd = new MySqlCommand(query, conn))
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    string nama = reader["nama_mobil"].ToString();
+                    string jumlah = reader["jumlah_sewa"].ToString();
+                    list.Add($"{nama} — {jumlah}x disewa");
+                }
+            }
+        }
+        return list;
     }
 }

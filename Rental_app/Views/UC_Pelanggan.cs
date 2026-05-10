@@ -91,19 +91,19 @@ namespace Rental_app
             string namaPelanggan = textBox1.Text;
             string alamat = textBox4.Text;
             int nomorTelepon;
+            //int totalSewa;
             if (!int.TryParse(textBox2.Text, out nomorTelepon))
             {
                 MessageBox.Show("Nomor telepon harus berupa angka!");
                 return;
             }
-            int totalSewa;
-            if (!int.TryParse(textBox3.Text, out totalSewa))
-            {
-                MessageBox.Show("Total sewa harus berupa angka!");
-                return;
-            }
+            //if (!int.TryParse(textBox3.Text, out totalSewa))
+            //{
+            //    MessageBox.Show("Total sewa harus berupa angka!");
+            //    return;
+            //}
 
-            if (PelangganController.createPelanggan(namaPelanggan, alamat, nomorTelepon, totalSewa) != null)
+            if (PelangganController.createPelanggan(namaPelanggan, alamat, nomorTelepon) != null)
             {
                 dataGridView1.DataSource = PelangganController.getPelanggan();
                 
@@ -150,8 +150,8 @@ namespace Rental_app
         {
             string namaPelanggan = textBox6.Text;
             string alamat = textBox5.Text;
-            int nomorTelepon = Convert.ToInt32(textBox8.Text);
-            int totalSewa = Convert.ToInt32(textBox7.Text);
+            int nomorTelepon = Convert.ToInt32(textBox7.Text);
+            int totalSewa = Convert.ToInt32(textBox8.Text);
 
             bool sukses = PelangganController.updatePelanggan(
                 id: Convert.ToInt32(dataGridView1.CurrentRow.Cells["id"].Value),
@@ -164,7 +164,8 @@ namespace Rental_app
             if (sukses)
             {
                 dataGridView1.DataSource = PelangganController.getPelanggan();
-                MessageBox.Show("Berhasil di update");
+                //MessageBox.Show("Berhasil di update");
+                panel3.Visible = false;
                 return;
             }
             else

@@ -60,9 +60,64 @@ namespace Rental_app
             label3.Text = dashboardController.totalMobil().ToString();
             label7.Text = dashboardController.totalPelanggan().ToString();
             label4.Text = dashboardController.totalAktif().ToString();
-             //var populerList = dashboardController.GetPopuler();
+            decimal pendapatanValue = dashboardController.pendapatan();
+            string pendapatan = "Rp " + pendapatanValue.ToString("N2", new System.Globalization.CultureInfo("id-ID"));
+            label10.Text = pendapatan;
+            TampilkanMobilTerlaris();
+            //var populerList = dashboardController.GetPopuler();
+        }
+        private void listPopuler_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            ListBox listBox = sender as ListBox;
+            bool isSelected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
+
+            // 1. Atur Warna Background Item
+            // Gunakan warna biru sangat muda (AliceBlue/mirip) jika dipilih, putih jika tidak
+            Color bgColor = isSelected ? Color.FromArgb(235, 245, 255) : Color.White;
+            using (SolidBrush bgBrush = new SolidBrush(bgColor))
+            {
+                e.Graphics.FillRectangle(bgBrush, e.Bounds);
+            }
+
+            // 2. Atur Warna dan Gaya Teks
+            // Gunakan warna biru tema jika dipilih, abu-abu gelap jika biasa
+            Color textColor = isSelected ? Color.FromArgb(0, 102, 204) : Color.FromArgb(64, 64, 64);
+            Font textFont = isSelected
+                ? new Font("Segoe UI Semibold", 11F, FontStyle.Bold) // Bold saat dipilih
+                : new Font("Segoe UI", 11F, FontStyle.Regular);
+
+            string text = listBox.Items[e.Index].ToString();
+
+            // 3. Gambar Teks dengan Padding (Indentasi margin kiri dan rata tengah vertikal)
+            using (SolidBrush textBrush = new SolidBrush(textColor))
+            {
+                // Margin kiri 15px, Margin atas (agar teks di tengah item height) sekitar 8px
+                float textY = e.Bounds.Top + ((e.Bounds.Height - textFont.Height) / 2);
+                e.Graphics.DrawString(text, textFont, textBrush, new PointF(e.Bounds.Left + 15, textY));
+            }
+
+            // (Opsional) Menggambar garis pemisah tipis di bawah setiap item
+            using (Pen separatorPen = new Pen(Color.FromArgb(240, 240, 240)))
+            {
+                e.Graphics.DrawLine(separatorPen, e.Bounds.Left + 10, e.Bounds.Bottom - 1, e.Bounds.Right - 10, e.Bounds.Bottom - 1);
+            }
+
+            e.DrawFocusRectangle(); // Menghilangkan kotak fokus default bertitik-titik
         }
 
+        private void TampilkanMobilTerlaris()
+        {
+            var ctrl = new DashboardController();
+            List<string> data = ctrl.DaftarMobilTerlaris();
+
+            listPopuler.Items.Clear();
+            foreach (string item in data)
+            {
+                listPopuler.Items.Add(item);
+            }
+        }
 
         private void gridKategori_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -90,6 +145,11 @@ namespace Rental_app
         }
 
         private void cardTersedia_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void cardPendapatan_Paint(object sender, PaintEventArgs e)
         {
 
         }

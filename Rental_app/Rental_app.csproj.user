@@ -13,7 +13,7 @@
     <Compile Update="UC_editPelanggan.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UC_Status.cs">
+    <Compile Update="Views\UC_Status.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UC_Template.cs">

@@ -23,7 +23,7 @@ public class Pelanggan {
     public string nama_pelanggan { get; set; }
     public string alamat { get; set; }
     public string nomor_telepon { get; set; }
-    //public string total_sewa { get; set; }
+    public string total_sewa { get; set; }
 }
 
 public class ItemTransaksiAktif

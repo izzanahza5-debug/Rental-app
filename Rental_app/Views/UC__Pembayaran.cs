@@ -264,7 +264,12 @@ namespace Rental_app
                                          jumlah_lunas, status_bayar, tgl_bayar, catatan)
                                     VALUES (@id, @met, @dp, @lns, @st, NOW(), @cat)", conn, tx);
                                 cmdIns.Parameters.AddWithValue("@id", _idTransaksi);
-                                cmdIns.Parameters.AddWithValue("@met", cboMetode.SelectedItem.ToString());
+                                if (cboMetode.SelectedItem == null)
+                                    MessageBox.Show("Pilih metode pembayaran!", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                else
+                                {
+                                    cmdIns.Parameters.AddWithValue("@met", cboMetode.SelectedItem.ToString());
+                                }
                                 cmdIns.Parameters.AddWithValue("@dp", dp);
                                 cmdIns.Parameters.AddWithValue("@lns", lunas);
                                 cmdIns.Parameters.AddWithValue("@st", status);
@@ -321,6 +326,7 @@ namespace Rental_app
             {
                 using (var conn = DBHelper.GetConnection())
                 {
+                    conn.Open();
                     string sql = @"
                         SELECT 
                             b.id_pembayaran                          AS 'ID Bayar',
@@ -343,7 +349,6 @@ namespace Rental_app
                     var cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@kw", "%" + keyword + "%");
 
-                    conn.Open();
                     var reader = cmd.ExecuteReader();
                     var listRiwayat = new List<RiwayatPembayaranItem>();
 
@@ -388,7 +393,9 @@ namespace Rental_app
         // ── Cetak Kwitansi ────────────────────────────────────
         private void btnCetak_Click(object sender, EventArgs e)
         {
-            if (_idPembayaran == 0 && _idTransaksi == 0)
+            int idBayar = Convert.ToInt32(dgvPembayaran.SelectedRows[0].Cells["IdBayar"].Value);
+            int idTrx = Convert.ToInt32(dgvPembayaran.SelectedRows[0].Cells["IdTrx"].Value.ToString().Replace("#", ""));
+            if (idBayar == 0 && idTrx == 0)
             {
                 MessageBox.Show("Pilih transaksi / simpan pembayaran dulu sebelum cetak!", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -406,7 +413,7 @@ namespace Rental_app
                     string sql = @"
                         SELECT b.id_pembayaran, b.metode_bayar, b.jumlah_dp, 
                                b.jumlah_lunas, b.status_bayar, b.tgl_bayar,
-                               p.nama, p.no_hp, p.alamat, 
+                               p.nama, p.nomor_wa, p.alamat, 
                                m.nama_mobil, m.nomor_plat, 
                                t.tgl_sewa, t.tgl_rencana_kembali, 
                                t.durasi, t.harga_per_hari, t.total_biaya
@@ -418,7 +425,9 @@ namespace Rental_app
                         ORDER BY b.tgl_bayar DESC LIMIT 1";
 
                     var cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@id", _idTransaksi);
+                    int idTrx = Convert.ToInt32(dgvPembayaran.SelectedRows[0].Cells["IdTrx"].Value.ToString().Replace("#", ""));
+
+                    cmd.Parameters.AddWithValue("@id", idTrx);
 
                     conn.Open();
                     var reader = cmd.ExecuteReader();
@@ -430,7 +439,7 @@ namespace Rental_app
                             IdPembayaran = reader["id_pembayaran"].ToString(),
                             TglBayar = Convert.ToDateTime(reader["tgl_bayar"]),
                             Nama = reader["nama"].ToString(),
-                            NoHp = reader["no_hp"].ToString(),
+                            NoHp = reader["nomor_wa"].ToString(),
                             NamaMobil = reader["nama_mobil"].ToString(),
                             PlatNomor = reader["nomor_plat"].ToString(),
                             TglSewa = Convert.ToDateTime(reader["tgl_sewa"]),
@@ -583,6 +592,21 @@ namespace Rental_app
         }
 
         private void dgvPembayaran_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void pnlHeader_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void grpInfoTransaksi_Enter_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCetak_Click_1(object sender, EventArgs e)
         {
 
         }

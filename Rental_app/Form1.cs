@@ -8,7 +8,7 @@ namespace Rental_app
         public Form1()
         {
             InitializeComponent();
-            SetupButtonHoverEffects();
+            //SetupButtonHoverEffects();
         }
 
         protected override void OnLoad(EventArgs e)
@@ -16,7 +16,7 @@ namespace Rental_app
             base.OnLoad(e);
             // Show Dashboard page by default
             ShowPage(new UC_Dashboard());
-            
+
         }
 
         private void SetupButtonHoverEffects()
@@ -38,8 +38,8 @@ namespace Rental_app
                     btn.ForeColor = Color.White;
                     Cursor = Cursors.Default;
                 };
-            }
-        }
+         }
+        }   
 
         /// <summary>
         /// Method untuk menampilkan halaman UserControl
@@ -117,6 +117,10 @@ namespace Rental_app
             ShowPage(new UC_Dashboard());
         }
 
+        private void btn_rental_Click(object sender, EventArgs e)
+        {
+            ShowPage(new UC_Status());
+        }
         private void panelContent_Paint(object sender, PaintEventArgs e)
         {
         }
@@ -125,6 +129,12 @@ namespace Rental_app
         {
 
         }
+
+        private void btn_laporan_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
     }
 
     /// <summary>
