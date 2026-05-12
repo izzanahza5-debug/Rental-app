@@ -65,6 +65,11 @@ namespace Rental_app
                     da.Fill(dt);
 
                     dgvStatus.DataSource = dt;
+                    if (dgvStatus.Columns.Count < 0)
+                    {
+                        label1.Visible = true;
+                        label2.Visible = true;
+                    }
                     AturHeaderTabel();
 
                 }
@@ -85,6 +90,11 @@ namespace Rental_app
                 dgvStatus.Columns["tgl_sewa"].HeaderText = "Tgl Pinjam";
                 dgvStatus.Columns["tgl_rencana_kembali"].HeaderText = "Batas Kembali";
                 dgvStatus.Columns["status"].HeaderText = "Status";
+            }
+            else
+            {
+                label1.Visible = true;
+                label2.Visible = true;
             }
         }
         private void UC_Status_Load(object sender, EventArgs e)
@@ -123,6 +133,26 @@ namespace Rental_app
 
         private void btnSelesai_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void btnPerpanjang_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvStatus_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSelesai_Click_1(object sender, EventArgs e)
+        {
             string status = dgvStatus.SelectedRows[0].Cells["Status"].Value.ToString();
             int id = Convert.ToInt32(dgvStatus.SelectedRows[0].Cells["id_transaksi"].Value);
             if (dgvStatus.SelectedRows.Count <= 0)
@@ -157,21 +187,6 @@ namespace Rental_app
                     MuatData();
                 }
             }
-        }
-
-        private void btnPerpanjang_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvStatus_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

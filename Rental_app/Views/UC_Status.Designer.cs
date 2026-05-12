@@ -18,14 +18,13 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             pnlHeader = new Panel();
-            lblSearch = new Label();
+            button1 = new Button();
             txtSearch = new TextBox();
             lblTitle = new Label();
             dgvStatus = new DataGridView();
             pnlFooter = new Panel();
-            btnRefresh = new Button();
-            btnPerpanjang = new Button();
             btnSelesai = new Button();
+            btnRefresh = new Button();
             label1 = new Label();
             label2 = new Label();
             pnlHeader.SuspendLayout();
@@ -35,8 +34,8 @@
             // 
             // pnlHeader
             // 
-            pnlHeader.BackColor = Color.FromArgb(44, 62, 80);
-            pnlHeader.Controls.Add(lblSearch);
+            pnlHeader.BackColor = Color.FromArgb(18, 30, 46);
+            pnlHeader.Controls.Add(button1);
             pnlHeader.Controls.Add(txtSearch);
             pnlHeader.Controls.Add(lblTitle);
             pnlHeader.Dock = DockStyle.Top;
@@ -46,39 +45,45 @@
             pnlHeader.Size = new Size(1500, 154);
             pnlHeader.TabIndex = 0;
             // 
-            // lblSearch
+            // button1
             // 
-            lblSearch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblSearch.AutoSize = true;
-            lblSearch.ForeColor = Color.LightGray;
-            lblSearch.Location = new Point(967, 64);
-            lblSearch.Margin = new Padding(5, 0, 5, 0);
-            lblSearch.Name = "lblSearch";
-            lblSearch.Size = new Size(97, 25);
-            lblSearch.TabIndex = 2;
-            lblSearch.Text = "Cari Mobil:";
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button1.BackColor = Color.FromArgb(46, 80, 118);
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(1274, 56);
+            button1.Margin = new Padding(5, 6, 5, 6);
+            button1.Name = "button1";
+            button1.Size = new Size(124, 46);
+            button1.TabIndex = 3;
+            button1.Text = "🔍 Search";
+            button1.UseVisualStyleBackColor = false;
             // 
             // txtSearch
             // 
             txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txtSearch.Font = new Font("Segoe UI", 11F);
-            txtSearch.Location = new Point(1083, 56);
+            txtSearch.Location = new Point(883, 56);
             txtSearch.Margin = new Padding(5, 6, 5, 6);
+            txtSearch.Multiline = true;
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(381, 37);
+            txtSearch.PlaceholderText = "Cari Mobil";
+            txtSearch.Size = new Size(381, 46);
             txtSearch.TabIndex = 1;
             // 
             // lblTitle
             // 
             lblTitle.AutoSize = true;
-            lblTitle.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold);
+            lblTitle.Font = new Font("Cambria", 19F, FontStyle.Bold);
             lblTitle.ForeColor = Color.White;
-            lblTitle.Location = new Point(33, 48);
+            lblTitle.Location = new Point(42, 47);
             lblTitle.Margin = new Padding(5, 0, 5, 0);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(420, 45);
+            lblTitle.Size = new Size(561, 44);
             lblTitle.TabIndex = 0;
-            lblTitle.Text = "Status Pinjaman Kendaraan";
+            lblTitle.Text = "🕑  Status Pinjaman Kendaraan";
             // 
             // dgvStatus
             // 
@@ -122,15 +127,31 @@
             // pnlFooter
             // 
             pnlFooter.BackColor = Color.White;
-            pnlFooter.Controls.Add(btnRefresh);
-            pnlFooter.Controls.Add(btnPerpanjang);
             pnlFooter.Controls.Add(btnSelesai);
+            pnlFooter.Controls.Add(btnRefresh);
             pnlFooter.Dock = DockStyle.Bottom;
             pnlFooter.Location = new Point(0, 961);
             pnlFooter.Margin = new Padding(5, 6, 5, 6);
             pnlFooter.Name = "pnlFooter";
             pnlFooter.Size = new Size(1500, 135);
             pnlFooter.TabIndex = 2;
+            // 
+            // btnSelesai
+            // 
+            btnSelesai.BackColor = Color.FromArgb(40, 167, 69);
+            btnSelesai.Cursor = Cursors.Hand;
+            btnSelesai.FlatAppearance.BorderSize = 0;
+            btnSelesai.FlatStyle = FlatStyle.Flat;
+            btnSelesai.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnSelesai.ForeColor = Color.White;
+            btnSelesai.Location = new Point(251, 38);
+            btnSelesai.Margin = new Padding(4, 5, 4, 5);
+            btnSelesai.Name = "btnSelesai";
+            btnSelesai.Size = new Size(192, 53);
+            btnSelesai.TabIndex = 4;
+            btnSelesai.Text = "Kembalikan Mobil";
+            btnSelesai.UseVisualStyleBackColor = false;
+            btnSelesai.Click += btnSelesai_Click_1;
             // 
             // btnRefresh
             // 
@@ -139,53 +160,20 @@
             btnRefresh.FlatStyle = FlatStyle.Flat;
             btnRefresh.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btnRefresh.ForeColor = Color.White;
-            btnRefresh.Location = new Point(42, 29);
+            btnRefresh.Location = new Point(42, 38);
             btnRefresh.Margin = new Padding(5, 6, 5, 6);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(200, 77);
+            btnRefresh.Size = new Size(200, 53);
             btnRefresh.TabIndex = 0;
             btnRefresh.Text = "Refresh Data";
             btnRefresh.UseVisualStyleBackColor = false;
             // 
-            // btnPerpanjang
-            // 
-            btnPerpanjang.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnPerpanjang.BackColor = Color.FromArgb(241, 196, 15);
-            btnPerpanjang.FlatAppearance.BorderSize = 0;
-            btnPerpanjang.FlatStyle = FlatStyle.Flat;
-            btnPerpanjang.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            btnPerpanjang.ForeColor = Color.White;
-            btnPerpanjang.Location = new Point(983, 29);
-            btnPerpanjang.Margin = new Padding(5, 6, 5, 6);
-            btnPerpanjang.Name = "btnPerpanjang";
-            btnPerpanjang.Size = new Size(217, 77);
-            btnPerpanjang.TabIndex = 1;
-            btnPerpanjang.Text = "Perpanjang Sewa";
-            btnPerpanjang.UseVisualStyleBackColor = false;
-            btnPerpanjang.Click += btnPerpanjang_Click;
-            // 
-            // btnSelesai
-            // 
-            btnSelesai.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnSelesai.BackColor = Color.FromArgb(46, 204, 113);
-            btnSelesai.FlatAppearance.BorderSize = 0;
-            btnSelesai.FlatStyle = FlatStyle.Flat;
-            btnSelesai.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            btnSelesai.ForeColor = Color.White;
-            btnSelesai.Location = new Point(1233, 29);
-            btnSelesai.Margin = new Padding(5, 6, 5, 6);
-            btnSelesai.Name = "btnSelesai";
-            btnSelesai.Size = new Size(233, 77);
-            btnSelesai.TabIndex = 2;
-            btnSelesai.Text = "Mobil Kembali";
-            btnSelesai.UseVisualStyleBackColor = false;
-            btnSelesai.Click += btnSelesai_Click;
-            // 
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = Color.FromArgb(245, 246, 250);
             label1.Font = new Font("Segoe UI", 19F);
-            label1.Location = new Point(492, 339);
+            label1.Location = new Point(475, 335);
             label1.Name = "label1";
             label1.Size = new Size(527, 51);
             label1.TabIndex = 3;
@@ -195,7 +183,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.BackColor = Color.WhiteSmoke;
+            label2.BackColor = Color.FromArgb(245, 246, 250);
             label2.Font = new Font("Microsoft YaHei UI", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.Location = new Point(661, 213);
             label2.Name = "label2";
@@ -228,13 +216,12 @@
         private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.Label lblSearch;
         private System.Windows.Forms.DataGridView dgvStatus;
         private System.Windows.Forms.Panel pnlFooter;
         private System.Windows.Forms.Button btnRefresh;
-        private System.Windows.Forms.Button btnPerpanjang;
-        private System.Windows.Forms.Button btnSelesai;
         private Label label1;
         private Label label2;
+        private Button button1;
+        private Button btnSelesai;
     }
 }
